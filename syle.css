@@ -16,7 +16,10 @@ body {
     overflow-y: auto;
 }
 
-/* ARKA PLAN GIF STİLLERİ TAMAMEN KALDIRILDI */
+/* ARKA PLAN GIF STİLLERİ KALDIRILDIĞI İÇİN GİZLİ TUTULUR */
+.background-gif {
+    display: none;
+}
 
 
 #container {
@@ -102,6 +105,26 @@ button {
 button:hover {
     background-color: #ff69b4;
     transform: translateY(-2px) scale(1.02);
+}
+
+/* YENİ EKLEME: Müzik Çalma Butonu ve Oynatıcı Stilleri */
+.music-play-button {
+    background-color: #6a5acd; /* Daha belirgin bir renk */
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    width: 80%;
+    font-size: 1em;
+}
+
+.music-play-button:hover {
+    background-color: #483d8b;
+    transform: translateY(-1px);
+}
+
+.music-track {
+    /* Oynatıcıyı tamamen gizle, kontrolü butona verdik */
+    display: none;
 }
 
 /* --- MÜZİK ALANI VE UYARI --- */

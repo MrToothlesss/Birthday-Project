@@ -1,31 +1,69 @@
 // script.js
 
-// SADECE BEYZA'NIN BİLDİĞİ ŞİFREYİ BURAYA YAZIN
+// 1. Şifre Tanımlaması (Sadece Beyza'nın Bileceği Şifre)
 const CORRECT_PASSWORD = "12ocak"; 
 
-// Sayfa geçiş fonksiyonu (Mevcut fonksiyonunuz korunmuştur)
+// Hangi sesin çaldığını takip etmek için değişken
+let currentAudio = null;
+
+// Müzik çalma/durdurma fonksiyonu
+function playMusic(trackId) {
+    const audio = document.getElementById(trackId);
+
+    // Başka bir ses çalıyorsa onu durdur
+    if (currentAudio && currentAudio !== audio) {
+        currentAudio.pause();
+    }
+
+    // Seçili sesi çal veya durdur (toggle)
+    if (audio.paused) {
+        // Tüm sesleri sıfırla (baştan çalması için)
+        document.querySelectorAll('.music-track').forEach(track => {
+            if (track !== audio) {
+                track.currentTime = 0;
+            }
+        });
+        
+        audio.play();
+        currentAudio = audio;
+    } else {
+        audio.pause();
+        currentAudio = null;
+    }
+}
+
+
+// Sayfa geçiş fonksiyonu
 function changePage(pageNumber) {
+    // Tüm sayfalara bak
     document.querySelectorAll('.page').forEach(page => {
+        // Hepsini gizle
         page.classList.add('hidden-page');
         page.classList.remove('active-page');
     });
+    
+    // İstenen sayfayı görünür yap
     const nextPage = document.getElementById('page' + pageNumber);
     nextPage.classList.remove('hidden-page');
     nextPage.classList.add('active-page');
+
     // Sayfayı yukarı kaydır (okunabilirliği artırmak için)
     document.getElementById('container').scrollTop = 0;
+    
+    // Sayfa değiştiğinde çalan müziği durdur
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+    }
 }
 
 // Şifre kontrolünü yapacak fonksiyon
 function checkPassword() {
-    // Tarayıcının açtığı şifre penceresi
     let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir.");
 
-    // Şifre kontrolü
     if (passwordAttempt === CORRECT_PASSWORD) {
-        // Doğru şifre girilirse içeriği göster
+        // Doğru şifre girilirse içeriği göster (index.html'deki #main-content için)
         document.getElementById('main-content').style.display = 'block'; 
-        document.getElementById('container').style.display = 'flex'; 
         alert("Giriş başarılı. İyi eğlenceler! ❤️");
     } else if (passwordAttempt !== null && passwordAttempt !== "") {
         // Yanlış şifre girilirse tekrar denemesini iste
