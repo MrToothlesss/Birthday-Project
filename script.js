@@ -1,7 +1,7 @@
 // script.js
 
 // 1. Şifre Tanımlaması (Sadece Beyza'nın Bileceği Şifre)
-const CORRECT_PASSWORD = "12ocak"; 
+const CORRECT_PASSWORD = "zambak"; 
 
 // Hangi sesin çaldığını takip etmek için değişken
 let currentAudio = null;
@@ -59,7 +59,7 @@ function changePage(pageNumber) {
 
 // Şifre kontrolünü yapacak fonksiyon
 function checkPassword() {
-    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir.");
+    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. Ben biliyorum Ama söylemicem İpucu en Sevdiğiniz Çiçek :) ");
 
     if (passwordAttempt === CORRECT_PASSWORD) {
         // Doğru şifre girilirse içeriği göster (index.html'deki #main-content için)
