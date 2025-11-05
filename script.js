@@ -56,7 +56,7 @@ function changePage(pageNumber) {
 
 // Şifre kontrolünü yapacak fonksiyon
 function checkPassword() {
-    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. Ben biliyorum Ama söylemicem İpucu en Sevdiğiniz Çiçek :)");
+    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. Ben biliyorum Ama söylemicem İpucu: Çiçek :)");
 
     if (passwordAttempt === CORRECT_PASSWORD) {
         document.getElementById('main-content').style.display = 'block'; 
