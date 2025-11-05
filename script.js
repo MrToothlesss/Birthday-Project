@@ -1,7 +1,7 @@
 // script.js
 
 // 1. Şifre Tanımlaması (Lütfen çiçek adıyla güncelleyin)
-const CORRECT_PASSWORD = "zambak"; // Şifre güncellendi: "zambak"
+const CORRECT_PASSWORD = "zambak"; 
 
 // Hangi sesin çaldığını takip etmek için değişken
 let currentAudio = null;
@@ -46,12 +46,13 @@ function changePage(pageNumber) {
     const nextPage = document.getElementById('page' + pageNumber);
     nextPage.classList.remove('hidden-page');
     nextPage.classList.add('active-page');
-
-    // !!! ÖNEMLİ DÜZELTME: Sayfayı en üste kaydırır (Mobil Sorunu Çözümü) !!!
-    window.scrollTo(0, 0); 
-    
-    // Bu satır, sayfa içi konteyneri kaydırıyordu, artık tüm tarayıcılar için window kullanıyoruz.
-    // document.getElementById('container').scrollTop = 0;
+    
+    // !!! YENİ EKLEME: SAYFAYI EN ÜSTE KAYDIRMA !!!
+    window.scrollTo({
+        top: 0,
+        behavior: 'instant' // Hızlı geçiş
+    });
+    // Eski konteyner kaydırma kodunu devre dışı bıraktık.
 }
 
 // Şifre kontrolünü yapacak fonksiyon
