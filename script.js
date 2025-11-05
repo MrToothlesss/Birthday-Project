@@ -47,10 +47,11 @@ function changePage(pageNumber) {
     nextPage.classList.remove('hidden-page');
     nextPage.classList.add('active-page');
 
-    document.getElementById('container').scrollTop = 0;
+    // !!! ÖNEMLİ DÜZELTME: Sayfayı en üste kaydırır (Mobil Sorunu Çözümü) !!!
+    window.scrollTo(0, 0); 
     
-    // !!! MÜZİK DURDURMA KODU KALDIRILDI !!! 
-    // Müzik artık Sayfa 4 ve Sayfa 5'te çalmaya devam edecektir.
+    // Bu satır, sayfa içi konteyneri kaydırıyordu, artık tüm tarayıcılar için window kullanıyoruz.
+    // document.getElementById('container').scrollTop = 0;
 }
 
 // Şifre kontrolünü yapacak fonksiyon
