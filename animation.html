@@ -7,7 +7,13 @@
     <style>
         /* Temel Ayarlar */
         *, *::after, *::before { padding: 0; margin: 0; box-sizing: border-box; }
-        :root { --dark-color: #000000; }
+        :root { --dark-color: #000000; 
+                /* ORİJİNAL ANİMASYON RENK TANIMLARI */
+                --flower-petal-light: #a7ffee;
+                --flower-petal-dark: #39c6d6; 
+                --stem-color: #159faa;        
+                --petal-shadow: rgba(255, 255, 255, 0.5); 
+        }
         
         body {
             background-color: var(--dark-color);
@@ -18,10 +24,27 @@
             overflow: hidden;
         }
 
-        /* ----- ÇİÇEK ANİMASYONU CSS'İ (Adamın Kodu) ----- */
-        .night { position: fixed; left: 50%; top: 0; transform: translateX(-50%); width: 100%; height: 100%; filter: blur(0.1vmin); }
+        /* --- PC/MASAÜSTÜ AYARLARI (Varsayılan: Geniş Ekranlar) --- */
+        /* PC'de orijinal boyutu koru */
         .flowers { position: relative; transform: scale(0.9); }
         .flower { position: absolute; bottom: 10vmin; transform-origin: bottom center; z-index: 10; --fl-speed: 0.8s; }
+        
+        
+        /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
+        @media (max-width: 768px) {
+            /* Mobil cihazlarda çiçeği BÜYÜT */
+            .flowers { 
+                transform: scale(1.8); 
+            }
+            /* Mobil cihazlarda çiçeği ORTALAYA ÇEK */
+            .flower { 
+                bottom: 40vmin; 
+            }
+        }
+
+        /* ----- ÇİÇEK ANİMASYONU CSS'İNİN GERİ KALANI (HİÇ DEĞİŞMEYEN KISIM) ----- */
+        .night { position: fixed; left: 50%; top: 0; transform: translateX(-50%); width: 100%; height: 100%; filter: blur(0.1vmin); }
+
         .flower--1 { animation: moving-flower-1 4s linear infinite; }
         .flower--1 .flower__line { height: 70vmin; animation-delay: 0.3s; }
         .flower--1 .flower__line__leaf--1 { animation: blooming-leaf-right var(--fl-speed) 1.6s backwards; }
