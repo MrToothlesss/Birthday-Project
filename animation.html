@@ -19,7 +19,6 @@
             background-color: var(--dark-color);
             display: flex;
             justify-content: center;
-            /* ⚠️ PC İÇİN ALTA HİZALI, MOBİLDE BU DEĞER DEĞİŞECEK */
             align-items: flex-end; 
             min-height: 100vh;
             overflow: hidden;
@@ -33,7 +32,7 @@
             position: absolute; 
             bottom: 10vmin; 
             left: 50%; 
-            transform: translateX(-50%); /* Yatay ortalamayı tamamlar */
+            transform: translateX(-50%); 
             transform-origin: bottom center; 
             z-index: 10; 
             --fl-speed: 0.8s; 
@@ -48,17 +47,18 @@
                 align-items: center !important; 
             }
             
-            /* 2. FLOWERS: Boyut küçültme ve 3D bozulma çözümü */
+            /* 2. FLOWERS: Boyut küçültme ve 3D bozulma çözümü (İç içe geçmeyi engeller) */
             .flowers { 
-                /* ⚠️ Uzun kalma sorununu çözmek için çok küçülttük (0.7). */
-                transform: scale(0.7) translateZ(-300px) !important; 
+                /* Boyut 0.7'de kalsın veya biraz büyütmek isterseniz 0.8 yapın */
+                transform: scale(0.7) translateZ(-500px) !important; 
                 transform-origin: center bottom !important; 
-                perspective: 1000px !important; 
+                /* ⚠️ Yaprakların ayrılması için güçlü Perspective değeri */
+                perspective: 1500px !important; 
             }
             
             /* 3. FLOWER: Aşağı Çekme (Dikey Merkezden Aşağı İndirme) */
             .flower { 
-                /* KONUM: Dikey merkeze (50%) yakın, ama biraz aşağıda (30%) */
+                /* Konum: Dikey merkeze (50%) yakın, ama biraz aşağıda (30%) */
                 bottom: 30% !important; 
                 left: 50% !important; 
                 
@@ -66,6 +66,13 @@
                 transform: translateX(-50%) translateY(50%) !important; 
                 
                 transform-origin: center center !important; 
+            }
+            
+            /* 4. EKSTRA GÜVENLİK: Çiçek Gövdesindeki Transform Kurallarını Sıfırla */
+            .flower--1 .flower__line,
+            .flower--2 .flower__line,
+            .flower--3 .flower__line {
+                transform: none !important; 
             }
         }
 
