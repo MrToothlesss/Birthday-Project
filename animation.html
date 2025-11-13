@@ -32,20 +32,28 @@
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
     @media (max-width: 768px) {
-    /* Çiçeği yeterince büyük tutarken katmanlanmayı azaltmak için daha ılımlı bir ölçek */
+    /* Yaprakların İç İçe Geçme Çözümü (Görüş Açısı Ekleme) */
+    /* Bu kural, 3D elemanların düzgün katmanlanmasını sağlar */
     .flowers { 
-        transform: scale(1.1) !important; /* Büyük boyutlandırmayı 1.1'e düşürdük */
-        transform-origin: 50% 100% !important; 
+        transform: scale(1.6) !important; /* Çiçeği yeterince BÜYÜTÜP (1.6) */
+        transform-origin: center bottom !important; 
+        
+        /* ⚠️ ÖNEMLİ: Mobil cihazlarda 3D derinliği düzeltmek için */
+        perspective: 1000px !important; 
+        
+        /* Çiçeği merkezden 500px ileri iterek katmanların açılmasını sağlayabiliriz */
+        transform: translateZ(-500px) scale(1.6) !important; 
     }
     
+    /* Konum Ayarı (Daha da Yukarı Çekme) */
     .flower { 
-        /* ⚠️ KONUM AYARI: bottom: 0% ile çiçeğin altını ekranın en altına sabitledik. */
+        /* En Alttan Başla */
         bottom: 0% !important; 
         left: 50% !important; 
         
-        /* ⚠️ YUKARI KAYDIRMA: Negatif yüzde ile çiçeği yukarı çekiyoruz. */
-        /* Bu değer ne kadar büyük NEGATİF olursa (örn. -100%), çiçek o kadar yukarı çıkar. */
-        transform: translateX(-50%) translateY(-100%) !important; 
+        /* ⚠️ Yukarı Çekme: Yüksek Negatif değer ile ekranın en üstüne yakın konumlandırma */
+        /* Bu değer ne kadar büyük NEGATİF olursa, çiçek o kadar yukarı çıkar. */
+        transform: translateX(-50%) translateY(-150%) !important; 
         
         transform-origin: center center !important; 
     }
