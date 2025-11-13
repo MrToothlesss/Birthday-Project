@@ -32,26 +32,26 @@
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
     @media (max-width: 768px) {
-    /* 1. BOYUTU KONTROL ETMEK İÇİN (1.3 hâlâ küçük gelirse yükseltin) */
+    /* 1. Flowers Sınıfındaki Sadece Boyutlandırmayı Değiştiriyoruz */
     .flowers { 
-        transform: scale(1.3) !important; 
+        /* Büyütme (scale) yerine sadece 3D perspektifini düzeltecek yeni bir ölçek deneyelim. */
+        /* Bu değer (1.4) daha önceki 1.3'e yakındır ama transform-origin'i de düzeltmeyi denedik. */
+        transform: scale(1.4) !important; 
+        
+        /* ⚠️ ÖNEMLİ: Çiçeğin mobil cihazlarda düzgün katmanlanmasını sağlamak için transform-origin'i değiştiriyoruz. */
+        transform-origin: 50% 100% !important; 
     }
     
-    /* 2. KONUMU KONTROL ETMEK İÇİN (Çiçeğin kendisi) */
+    /* 2. Flower Sınıfında Dikey Kaydırmayı Koruyoruz */
     .flower { 
-        /* Bütün kaydırma ayarlarını sıfırlayıp yeniden ayarlıyoruz: */
-        
-        /* Çiçeğin alt kenarını ekranın %35'ine sabitle (Daha yukarıya ittik) */
-        bottom: 60% !important; 
-        
-        /* Çiçeği yatayda merkeze (left: 50%) aldıktan sonra kendi genişliğinin yarısı kadar sola kaydırır */
+        /* Konumu ekranın dikey merkezine sabitledik */
+        bottom: 50% !important; 
         left: 50% !important; 
         
-        /* Dikey konumlandırmayı tamamlar (kendi yüksekliğinin yarısı kadar yukarı) */
-        /* Ek olarak yatay hizalamayı (translateX(-50%)) koruduk */
-        transform: translateX(-50%) translateY(70%) !important; 
+        /* Çiçeği yeterince yukarı çekmek için (bottom: 50% ile beraber çalışır) */
+        transform: translateX(-50%) translateY(75%) !important; 
         
-        /* Bazı eski animasyon kodlarında transform-origin altta kalmış olabilir, onu da düzeltelim. */
+        /* Bu sefer transform-origin'i kayık kalmaması için center center yaptık */
         transform-origin: center center !important; 
     }
 }
