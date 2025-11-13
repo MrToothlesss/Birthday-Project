@@ -6,8 +6,9 @@
     <title>Sana Özel Bir Mesaj</title>
     <link rel="stylesheet" href="syle.css">
 </head>
-<body>
-    <div id="container">
+<body> 
+    
+    <div id="container" style="display: none;"> 
         
         <div id="page1" class="page active-page">
             <div class="content-box">
@@ -32,113 +33,113 @@
                 </div>
             </div>
         </div>
-        
+                
         <div id="page3" class="page hidden-page">
-    <div class="content-box">
-        <h2>Önce Huzur, Sonra Mesaj 🎧</h2>
-        <p>Biliyorum, şu an odaklanman gereken çok önemli işlerin var. Bu yüzden, mesajımı okumaya başlamadan önce "sana en iyi gelen müziğini" seçebilirsin.</p>
-        
-        <div class="music-player-container">
-            <h3>Huzur Müziği Seçimi (Kontrol Sende)</h3>
-            
-            <h4>1. En Tercih Edilen Bu: New West - Those Eyes</h4>
-            <button onclick="playMusic('track1')" class="music-play-button">Müziği Başlat / Duraklat</button>
-            <audio id="track1" class="music-track" src="Mp3 Musics/New West - Those Eyes.mp3" ></audio>
-            
-            <h4>2. Arctic Monkeys - I Wanna Be Yours</h4>
-            <button onclick="playMusic('track2')" class="music-play-button">Müziği Başlat / Duraklat</button>
-            <audio id="track2" class="music-track" src="Mp3 Musics/Arctic Monkeys - I Wanna Be Yours.mp3" ></audio>
-            
-            <h4>3. Cigarettes After Sex - Apocalypse</h4>
-            <button onclick="playMusic('track3')" class="music-play-button">Müziği Başlat / Duraklat</button>
-            <audio id="track3" class="music-track" src="Mp3 Musics/Cigarettes After Sex - Apocalypse.mp3" ></audio>
+            <div class="content-box">
+                <h2>Önce Huzur, Sonra Mesaj 🎧</h2>
+                <p>Biliyorum, şu an odaklanman gereken çok önemli işlerin var. Bu yüzden, mesajımı okumaya başlamadan önce "sana en iyi gelen müziğini" seçebilirsin.</p>
+                            
+                <div class="music-player-container">
+                    <h3>Huzur Müziği Seçimi (Kontrol Sende)</h3>
+                                
+                    <h4>1. En Tercih Edilen Bu: New West - Those Eyes</h4>
+                    <button onclick="playMusic('track1')" class="music-play-button">Müziği Başlat / Duraklat</button>
+                    <audio id="track1" class="music-track" src="Mp3 Musics/New West - Those Eyes.mp3" ></audio>
+                                
+                    <h4>2. Arctic Monkeys - I Wanna Be Yours</h4>
+                    <button onclick="playMusic('track2')" class="music-play-button">Müziği Başlat / Duraklat</button>
+                    <audio id="track2" class="music-track" src="Mp3 Musics/Arctic Monkeys - I Wanna Be Yours.mp3" ></audio>
+                                
+                    <h4>3. Cigarettes After Sex - Apocalypse</h4>
+                    <button onclick="playMusic('track3')" class="music-play-button">Müziği Başlat / Duraklat</button>
+                    <audio id="track3" class="music-track" src="Mp3 Musics/Cigarettes After Sex - Apocalypse.mp3" ></audio>
 
-            <h4>4. Beach Weather - sex, drugs, etc</h4>
-            <button onclick="playMusic('track4')" class="music-play-button">Müziği Başlat / Duraklat</button>
-            <audio id="track4" class="music-track" src="Mp3 Musics/Beach Weather - sex, drugs, etc.mp3" ></audio>
-            
-            <p class="music-warning-note">
-                **Önemli Not:** Müziğin tamamını dinleyebilirsin. Butona basarak başlatabilir, aynı butona basarak duraklatabilirsin.
-            </p>
-        </div>
+                    <h4>4. Beach Weather - sex, drugs, etc</h4>
+                    <button onclick="playMusic('track4')" class="music-play-button">Müziği Başlat / Duraklat</button>
+                    <audio id="track4" class="music-track" src="Mp3 Musics/Beach Weather - sex, drugs, etc.mp3" ></audio>
+                                
+                    <p class="music-warning-note">
+                        **Önemli Not:** Müziğin tamamını dinleyebilirsin. Butona basarak başlatabilir, aynı butona basarak duraklatabilirsin.
+                    </p>
+                </div>
 
-        <div class="navigation navigation-small">
-            <button onclick="changePage(2)" class="back-button">Geri Dön</button>
-            <button onclick="changePage(4)">Şimdi Oku</button>
+                <div class="navigation navigation-small">
+                    <button onclick="changePage(2)" class="back-button">Geri Dön</button>
+                    <button onclick="changePage(4)">Şimdi Oku</button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-        
+                
         <div id="page4" class="page hidden-page">
-    <div class="content-box">
-        <h2>Sınırların, Benim Saygım ve Bir İtiraf</h2>
+            <div class="content-box">
+                <h2>Sınırların, Benim Saygım ve Bir İtiraf</h2>
 
-        <p class="strong-text" style="color: #ff69b4;">
-            Evet, ilk buluştuğumuzda ya da konuşmamızda bana "derslerimi önemsemek zorundayım" demiştin. Ben de evet zaten ilk derslerine odaklan sonra devam ederdik demiştim. Bunu baya düşünmüştüm. Sınav zamanı geldiğinde 3-4 hafta buluşamayacağımızı, senin baya meşgul olacağını biliyordum ve gördüm. Ama "beklemeye değerdi."
-        </p>
-        <p class="strong-text" style="color: #a0522d;">
-            Ben savaşmaya hazırdım, desteklemeye hazırdım. İhtiyacın olduğunda, modun düşük olduğunda arkanda olacaktım. Evet "ben üzüleceğim" demiştin bana ama "bırak ben üzüleyim, sen üzülme" istedim. Seni cidden mutlu edeceğimi de biliyordum.
-        </p>
-        <p>İlişkimizin, senin o yoğun sınav stresin ve kariyer hedefinle aynı zamana denk gelmesi bir talihsizlikti. O gün bana 'sorunun benlik olduğunu, bu dönemde ilişki yürütmek istemediğini' söylediğinde, senin dürüstlüğüne olan saygım daha da arttı.</p>
-        
-        <p class="strong-text">Bu yüzden, hemen o günlerde seni rahatsız ettiğim için özür dilerim. İlk gerçek sevgilimdin; kaybetmek istememiştim. Hata yaptım. Bu hatanın telafisi ise senin sınırlarına saygı duymaktır.</p>
-        
-        <p>Benim sessizliğim, sana olan ilgisizliğim değil, **sınırlarına duyduğum en büyük saygıdır.**</p>
+                <p class="strong-text" style="color: #ff69b4;">
+                    Evet, ilk buluştuğumuzda ya da konuşmamızda bana "derslerimi önemsemek zorundayım" demiştin. Ben de evet zaten ilk derslerine odaklan sonra devam ederdik demiştim. Bunu baya düşünmüştüm. Sınav zamanı geldiğinde 3-4 hafta buluşamayacağımızı, senin baya meşgul olacağını biliyordum ve gördüm. (Ama "beklemeye değerdi.")
+                </p>
+                <p class="strong-text" style="color: #a0522d;">
+                    Ben savaşmaya hazırdım, desteklemeye hazırdım. İhtiyacın olduğunda, modun düşük olduğunda arkanda olacaktım. (Evet "ben üzüleceğim" demiştin bana ama "bırak ben üzüleyim, sen üzülme" istedim.) Seni cidden mutlu edeceğimi de biliyordum.
+                </p>
+                <p>İlişkimizin, senin o yoğun sınav stresin ve kariyer hedefinle aynı zamana denk gelmesi bir talihsizlikti. O gün bana 'sorunun benlik olduğunu, bu dönemde ilişki yürütmek istemediğini' söylediğinde, senin dürüstlüğüne olan saygım daha da arttı.</p>
+                        
+                <p class="strong-text">Bu yüzden, hemen o günlerde seni rahatsız ettiğim için özür dilerim. İlk gerçek sevgilimdin; kaybetmek istememiştim. Hata yaptım. Bu hatanın telafisi ise senin sınırlarına saygı duymaktır.</p>
+                        
+                <p>Benim sessizliğim, sana olan ilgisizliğim değil, **sınırlarına duyduğum en büyük saygıdır.**</p>
 
-        <p class="final-closing">
-            Evet, bunları belki ayrıldığımızda daha önce söylemişimdir ama "yine de söylemek istedim." Umarım bunları okuyunca tekrar senin aklında olurum. Çok özür dilerim, ama doğum günün yani sonuçta. Umarım fikrin değişirse, tekrar ilişki istersen seni bekleyeceğim. Ben de beklerken kendime odaklanmış olurum bir yandan.
-        </p>
-        
-        <img src="Gifs/stitch-thoughtful-unscreen.gif" alt="Düşünceli Stitch" class="page-gif">
-        <div class="navigation navigation-small">
-            <button onclick="changePage(3)" class="back-button">Geri Dön</button>
-            <button onclick="changePage(5)">Son Mesaj</button>
+                <p class="final-closing">
+                    Evet, bunları belki ayrıldığımızda daha önce söylemişimdir ama "yine de söylemek istedim." Umarım bunları okuyunca tekrar senin aklında olurum. Çok özür dilerim, ama doğum günün yani sonuçta. Umarım fikrin değişirse, tekrar ilişki istersen seni bekleyeceğim. Ben de beklerken kendime odaklanmış olurum bir yandan.
+                </p>
+                        <img src="Gifs/stitch-thoughtful-unscreen.gif" alt="Düşünceli Stitch" class="page-gif">
+                <div class="navigation navigation-small">
+                    <button onclick="changePage(3)" class="back-button">Geri Dön</button>
+                    <button onclick="changePage(5)">Son Mesaj</button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-        
+                
         <div id="page5" class="page hidden-page">
-    <div class="content-box">
-        <h2>Senin En Güvenilir Desteğin</h2>
-        
-        <p>Şu an aramızdaki mesafeye rağmen, sana karşı olan **hislerimin ve bağlılığımın değişmediğini** bilmeni istiyorum. Bu, senin hırslarına ve hedeflerine duyduğun **derin saygıdan** geliyor.</p>
-        
-        <p class="strong-text" style="color: #6a5acd;">
-            Hatta gözlerine baktığımda bana **güven veriyor, huzur veriyor**, sanki **evdeymişim gibi** hissettiriyor. Bu yüzden ben de senin için en güvenilir liman olmak istiyorum.
-        </p>
-        
-        <p class="strong-text" style="color: #6a5acd;">
-            Benim gibi biriyle, yani **senin için cidden savaşan ve uğraşan bir partneri** belki  hayatında ilk defa görüyorsun. **Senin için en değerli olanı anlıyorum: Kendi varlıklarımızı koruyarak 1+1=11 olabilmek.** Ben de seninle kendi benliğimizi kaybetmeden, birbirimizi büyüterek, **gerçekten bir gelecek görüyorum.**
-        </p>
-        <p class="strong-text">
-            Belki gözünde boşuna uğraşıyorumdur, ama sana dürüst olmalıyım: **Benim gibi birinin senin hayatından bir daha ne zaman geçeceğini bilmiyorsun.**
-        </p>
-        
-        <p>Benim için esas olan, her zaman senin arkanda durmaktır. Söz veriyorum; ben, senin bu zorlu mücadeledeki en sağlam, **güvenebileceğin ve ağlayabileceğin bir omuz** olmak istiyorum.</p>
-        
-        <p class="final-closing">
-            Biliyorum, etrafında güvendiğin yakın arkadaşların var. Ama şunu da bil ki, **cidden büyük bir derdin olursa, acil bir durum yaşarsan** yada benden birşey istiyorsan veya sadece kendini yalnız hissedersen, aramaktan ya da yazmaktan hiç çekinme. Ben her zaman ulaşılabilirim ve seni dinlemeye hazırım.
-        </p>
+            <div class="content-box">
+                <h2>Senin En Güvenilir Desteğin</h2>
+                        
+                <p>Şu an aramızdaki mesafeye rağmen, sana karşı olan **hislerimin ve bağlılığımın değişmediğini** bilmeni istiyorum. Bu, senin hırslarına ve hedeflerine duyduğun **derin saygıdan** geliyor.</p>
+                        
+                <p class="strong-text" style="color: #6a5acd;">
+                    Hatta gözlerine baktığımda bana **güven veriyor, huzur veriyor**, sanki **evdeymişim gibi** hissettiriyor. Bu yüzden ben de senin için en güvenilir liman olmak istiyorum.
+                </p>
+                        
+                <p class="strong-text" style="color: #6a5acd;">
+                    Benim gibi biriyle, yani **senin için cidden savaşan ve uğraşan bir partneri** belki  hayatında ilk defa görüyorsun. **Senin için en değerli olanı anlıyorum: Kendi varlıklarımızı koruyarak 1+1=11 olabilmek.** Ben de seninle kendi benliğimizi kaybetmeden, birbirimizi büyüterek, **gerçekten bir gelecek görüyorum.**
+                </p>
+                <p class="strong-text">
+                    Belki gözünde boşuna uğraşıyorumdur, ama sana dürüst olmalıyım: **Benim gibi birinin senin hayatından bir daha ne zaman geçeceğini bilmiyorsun.**
+                </p>
+                        
+                <p>Benim için esas olan, her zaman senin arkanda durmaktır. Söz veriyorum; ben, senin bu zorlu mücadeledeki en sağlam, **güvenebileceğin ve ağlayabileceğin bir omuz** olmak istiyorum.</p>
+                        
+                <p class="final-closing">
+                    Biliyorum, etrafında güvendiğin yakın arkadaşların var. Ama şunu da bil ki, **cidden büyük bir derdin olursa, acil bir durum yaşarsan** yada benden birşey istiyorsan veya sadece kendini yalnız hissedersen, aramaktan ya da yazmaktan hiç çekinme. Ben her zaman ulaşılabilirim ve seni dinlemeye hazırım.
+                </p>
 
-        <p class="final-closing">
-            Sınav baskın azaldığında ya da YKS sonrası **hazır hissettiğinde**, benim burada olacağımı biliyorsun. **Senin için her zaman beklemeye değerim.** Eğer o gün gelirse, birbirimizi hiç tanışmamış gibi her şeye sıfırdan başlayarak bir şans daha verebiliriz.
-        </p>
+                <p class="final-closing">
+                    Sınav baskın azaldığında ya da YKS sonrası **hazır hissettiğinde**, benim burada olacağımı biliyorsun. **Senin için her zaman beklemeye değerim.** Eğer o gün gelirse, birbirimizi hiç tanışmamış gibi her şeye sıfırdan başlayarak bir şans daha verebiliriz.
+                </p>
 
-        <p class="final-closing">
-            Hayat seni benden başka bir yere götürürse ve bir başkası girerse hayatına, emin ol ki buna da **en büyük saygıyı göstereceğim.**
-        </p>
+                <p class="final-closing">
+                    Hayat seni benden başka bir yere götürürse ve bir başkası girerse hayatına, emin ol ki buna da **en büyük saygıyı göstereceğim.**
+                </p>
 
-        <p class="final-closing">
-            Aslında sana anlatmak istediğim daha çok şey vardı, ama zamanını almamak adına onlar şimdilik bende kalsın. Umarım bu jest, omuzlarındaki baskıyı az da olsa hafifletmiştir. Tekrar iyi ki doğdun, Beyza. **Kendine çok dikkat et.** Görüşmek üzere.
-        </p>
-        <p class="signature">- Love Yiğit (Spiderman)</p>
-        <img src="Gifs/stitch-success-unscreen.gif" alt="Başarılı Stitch" class="page-gif">
-        
-        <div class="navigation navigation-small">
-            <button onclick="changePage(4)" class="back-button">Geri Dön</button>
+                <p class="final-closing">
+                    Aslında sana anlatmak istediğim daha çok şey vardı, ama zamanını almamak adına onlar şimdilik bende kalsın. Umarım bu jest, omuzlarındaki baskıyı az da olsa hafifletmiştir. Tekrar iyi ki doğdun, Beyza. **Kendine çok dikkat et.** Görüşmek üzere.
+                </p>
+                <p class="signature">- Love Yiğit (Spiderman)</p>
+                <img src="Gifs/stitch-success-unscreen.gif" alt="Başarılı Stitch" class="page-gif">
+                        
+                <div class="navigation navigation-small">
+                    <button onclick="changePage(4)" class="back-button">Geri Dön</button>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
     <script src="script.js"></script>
 </body>
