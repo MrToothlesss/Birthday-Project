@@ -1,7 +1,7 @@
 // script.js
 
 // 1. Şifre Tanımlaması (Lütfen çiçek adıyla güncelleyin)
-const CORRECT_PASSWORD = "zambak"; 
+const CORRECT_PASSWORD = "Zambak"; 
 
 // Hangi sesin çaldığını takip etmek için değişken
 let currentAudio = null;
