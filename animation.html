@@ -32,19 +32,20 @@
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
     @media (max-width: 768px) {
-    /* 1. Boyut ve Yaprak Katmanlanma Çözümü */
+    /* 1. BOYUT KÜÇÜLTME VE YAPRAK SORUNU ÇÖZÜMÜ */
     .flowers { 
-        /* Boyut 1.5'te kalsın veya 1.6'ya çıkarılabilir */
-        transform: scale(1.5) translateZ(-300px) !important; 
+        /* Boyutu 1.5'ten 1.0'a düşürdük. Çiçek artık PC'deki boyutta görünecektir. */
+        transform: scale(1.0) translateZ(-300px) !important; 
         transform-origin: center bottom !important; 
         perspective: 1000px !important; 
     }
     
+    /* 2. YUKARI KONUMLANDIRMA (BOTTOM AYARI) */
     .flower { 
         bottom: 0% !important; 
         left: 50% !important; 
         
-        /* ⚠️ YENİ YUKARI KAYDIRMA: -250% yapıldı. */
+        /* ⚠️ YUKARI KAYDIRMA: -250% yapıldı. */
         /* Çiçeği kendi yüksekliğinin 2.5 katı kadar yukarı çeker. Bu, en üst konuma yaklaştırır. */
         transform: translateX(-50%) translateY(-250%) !important; 
         
