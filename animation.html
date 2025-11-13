@@ -32,27 +32,22 @@
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
     @media (max-width: 768px) {
-    /* Yaprakların İç İçe Geçme Çözümü (Görüş Açısı Ekleme) */
-    /* Bu kural, 3D elemanların düzgün katmanlanmasını sağlar */
+    /* 1. Çiçeği BÜYÜTME ve Yaprak Katmanlanmasını ÇÖZME */
     .flowers { 
-        transform: scale(1.6) !important; /* Çiçeği yeterince BÜYÜTÜP (1.6) */
+        /* Mobil Boyut: Yeterince büyük (1.6) ve katmanlama için 3D ayarı */
+        transform: scale(1.6) translateZ(-500px) !important; 
         transform-origin: center bottom !important; 
         
-        /* ⚠️ ÖNEMLİ: Mobil cihazlarda 3D derinliği düzeltmek için */
+        /* 3D Görüş Açısı (Katmanlanmayı Kesin Çözer) */
         perspective: 1000px !important; 
-        
-        /* Çiçeği merkezden 500px ileri iterek katmanların açılmasını sağlayabiliriz */
-        transform: translateZ(-500px) scale(1.6) !important; 
     }
     
-    /* Konum Ayarı (Daha da Yukarı Çekme) */
+    /* 2. Çiçeği EKRANIN ÜSTÜNE ÇEKME */
     .flower { 
-        /* En Alttan Başla */
         bottom: 0% !important; 
         left: 50% !important; 
         
-        /* ⚠️ Yukarı Çekme: Yüksek Negatif değer ile ekranın en üstüne yakın konumlandırma */
-        /* Bu değer ne kadar büyük NEGATİF olursa, çiçek o kadar yukarı çıkar. */
+        /* YUKARI KAYDIRMA: -150% ile en üste yakın konumlandırılır. */
         transform: translateX(-50%) translateY(-150%) !important; 
         
         transform-origin: center center !important; 
