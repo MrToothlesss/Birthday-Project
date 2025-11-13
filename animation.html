@@ -32,23 +32,21 @@
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
     @media (max-width: 768px) {
-    /* 1. Çiçeği BÜYÜTME ve Yaprak Katmanlanmasını ÇÖZME */
+    /* 1. Boyut ve Yaprak Katmanlanma Çözümü */
     .flowers { 
-        /* Mobil Boyut: Yeterince büyük (1.6) ve katmanlama için 3D ayarı */
+        /* Boyut 1.5'te kalsın veya 1.6'ya çıkarılabilir */
         transform: scale(1.5) translateZ(-300px) !important; 
         transform-origin: center bottom !important; 
-        
-        /* 3D Görüş Açısı (Katmanlanmayı Kesin Çözer) */
         perspective: 1000px !important; 
     }
     
-    /* 2. Çiçeği EKRANIN ÜSTÜNE ÇEKME */
     .flower { 
         bottom: 0% !important; 
         left: 50% !important; 
         
-        /* YUKARI KAYDIRMA: -150% ile en üste yakın konumlandırılır. */
-        transform: translateX(-50%) translateY(-170%) !important; 
+        /* ⚠️ YENİ YUKARI KAYDIRMA: -250% yapıldı. */
+        /* Çiçeği kendi yüksekliğinin 2.5 katı kadar yukarı çeker. Bu, en üst konuma yaklaştırır. */
+        transform: translateX(-50%) translateY(-250%) !important; 
         
         transform-origin: center center !important; 
     }
