@@ -31,16 +31,23 @@
         
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
-        @media (max-width: 768px) {
-            /* Mobil cihazlarda çiçeği BÜYÜT */
-            .flowers { 
-                transform: scale(1.5); 
-            }
-            /* Mobil cihazlarda çiçeği ORTALAYA ÇEK */
-            .flower { 
-                bottom: 35vmin; 
-            }
+    @media (max-width: 768px) {
+        /* iPhone 16 Pro ve benzeri uzun ekranlı cihazlar için */
+        .flowers { 
+            /* Çiçeğin boyutunu daha da büyüttük, tüm ayrıntılar gözüksün diye */
+            transform: scale(2.2); /* Önceki 1.8'den 2.2'ye çıkarıldı */
         }
+        
+        /* Çiçeği dikeyde daha iyi ortalamak için */
+        .flower { 
+            /* Ekranın altından %50'ye yakın bir noktaya çekiyoruz, 
+               bu da çiçeği tam ortaya konumlar. */
+            bottom: 50%; 
+            /* Çiçeğin alt kenarını tam %50'ye konumlandırdık, 
+               kendi yüksekliğinin yarısı kadar yukarı kaydırarak tam ortaladık */
+            transform: translateY(50%); 
+        }
+    }
 
         /* ----- ÇİÇEK ANİMASYONU CSS'İNİN GERİ KALANI (HİÇ DEĞİŞMEYEN KISIM) ----- */
         .night { position: fixed; left: 50%; top: 0; transform: translateX(-50%); width: 100%; height: 100%; filter: blur(0.1vmin); }
