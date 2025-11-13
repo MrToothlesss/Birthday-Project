@@ -32,27 +32,15 @@
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
     @media (max-width: 768px) {
-    /* 1. Flowers Sınıfındaki Sadece Boyutlandırmayı Değiştiriyoruz */
-    .flowers { 
-        /* Büyütme (scale) yerine sadece 3D perspektifini düzeltecek yeni bir ölçek deneyelim. */
-        /* Bu değer (1.4) daha önceki 1.3'e yakındır ama transform-origin'i de düzeltmeyi denedik. */
-        transform: scale(1.4) !important; 
-        
-        /* ⚠️ ÖNEMLİ: Çiçeğin mobil cihazlarda düzgün katmanlanmasını sağlamak için transform-origin'i değiştiriyoruz. */
-        transform-origin: 50% 100% !important; 
-    }
+    /* ... (Diğer kurallar aynı kalsın) ... */
     
-    /* 2. Flower Sınıfında Dikey Kaydırmayı Koruyoruz */
     .flower { 
-        /* Konumu ekranın dikey merkezine sabitledik */
-        bottom: 50% !important; 
-        left: 50% !important; 
+        /* ... (Konum kuralları aynı kalsın) ... */
         
-        /* Çiçeği yeterince yukarı çekmek için (bottom: 50% ile beraber çalışır) */
-        transform: translateX(-60%) translateY(80%) !important; 
+        /* ⚠️ ÇİÇEĞİ YUKARI ÇEKMEK İÇİN BU DEĞERİ AZALTIN (80% yerine daha küçük bir sayı) */
+        transform: translateX(-60%) translateY(40%) !important; 
         
-        /* Bu sefer transform-origin'i kayık kalmaması için center center yaptık */
-        transform-origin: center center !important; 
+        /* ... (Diğer kurallar aynı kalsın) ... */
     }
 }
 
