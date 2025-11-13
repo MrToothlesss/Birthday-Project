@@ -19,6 +19,7 @@
             background-color: var(--dark-color);
             display: flex;
             justify-content: center;
+            /* ⚠️ PC İÇİN ALTA HİZALI, MOBİLDE BU DEĞER DEĞİŞECEK */
             align-items: flex-end; 
             min-height: 100vh;
             overflow: hidden;
@@ -27,7 +28,7 @@
         /* --- PC/MASAÜSTÜ AYARLARI (Varsayılan) --- */
         .flowers { position: relative; transform: scale(0.9); }
         
-        /* PC'de yatay ortalama eklenmiş ve konumlandırılmıştır. */
+        /* PC: Yatay Ortada ve Altta */
         .flower { 
             position: absolute; 
             bottom: 10vmin; 
@@ -41,21 +42,28 @@
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
         @media (max-width: 768px) {
-            /* 1. BOYUT KÜÇÜLTME VE YAPRAK SORUNU ÇÖZÜMÜ */
+            /* 1. BODY YÜKSEKLİK HİZALAMASINI SIFIRLA */
+            body {
+                /* Mobil için sayfanın alt kenarına çekilme kuralını ortadan kaldırır. */
+                align-items: center !important; 
+            }
+            
+            /* 2. FLOWERS: Boyut küçültme ve 3D bozulma çözümü */
             .flowers { 
-                /* Uzun/Büyük görünme sorununu çözmek için PC'den bile küçük (0.8) */
-                transform: scale(0.8) translateZ(-300px) !important; 
+                /* ⚠️ Uzun kalma sorununu çözmek için çok küçülttük (0.7). */
+                transform: scale(0.7) translateZ(-300px) !important; 
                 transform-origin: center bottom !important; 
                 perspective: 1000px !important; 
             }
             
-            /* 2. YUKARI KONUMLANDIRMA */
+            /* 3. FLOWER: Aşağı Çekme (Dikey Merkezden Aşağı İndirme) */
             .flower { 
-                bottom: 50% !important; 
+                /* KONUM: Dikey merkeze (50%) yakın, ama biraz aşağıda (30%) */
+                bottom: 30% !important; 
                 left: 50% !important; 
                 
-                /* YUKARI KAYDIRMA: -250% ile en üst konuma yaklaştırıldı. */
-                transform: translateX(-50%) translateY(-100%) !important; 
+                /* KAYDIRMA: Dikey merkeze göre kaydırma. Aşağıda kalmasını sağlar. */
+                transform: translateX(-50%) translateY(50%) !important; 
                 
                 transform-origin: center center !important; 
             }
