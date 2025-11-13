@@ -7,12 +7,12 @@
     <style>
         /* Temel Ayarlar */
         *, *::after, *::before { padding: 0; margin: 0; box-sizing: border-box; }
-        :root { --dark-color: #000000; 
-                /* ORİJİNAL ANİMASYON RENK TANIMLARI */
-                --flower-petal-light: #a7ffee;
-                --flower-petal-dark: #39c6d6; 
-                --stem-color: #159faa;        
-                --petal-shadow: rgba(255, 255, 255, 0.5); 
+        :root { 
+            --dark-color: #000000; 
+            --flower-petal-light: #a7ffee;
+            --flower-petal-dark: #39c6d6; 
+            --stem-color: #159faa;        
+            --petal-shadow: rgba(255, 255, 255, 0.5); 
         }
         
         body {
@@ -24,34 +24,42 @@
             overflow: hidden;
         }
 
-        /* --- PC/MASAÜSTÜ AYARLARI (Varsayılan: Geniş Ekranlar) --- */
-        /* PC'de orijinal boyutu koru */
+        /* --- PC/MASAÜSTÜ AYARLARI (Varsayılan) --- */
         .flowers { position: relative; transform: scale(0.9); }
-        .flower { position: absolute; bottom: 10vmin; transform-origin: bottom center; z-index: 10; --fl-speed: 0.8s; }
+        
+        /* PC'de yatay ortalama eklenmiş ve konumlandırılmıştır. */
+        .flower { 
+            position: absolute; 
+            bottom: 10vmin; 
+            left: 50%; 
+            transform: translateX(-50%); /* Yatay ortalamayı tamamlar */
+            transform-origin: bottom center; 
+            z-index: 10; 
+            --fl-speed: 0.8s; 
+        }
         
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
-    @media (max-width: 768px) {
-    /* 1. BOYUT KÜÇÜLTME VE YAPRAK SORUNU ÇÖZÜMÜ */
-    .flowers { 
-        /* Boyutu 1.5'ten 1.0'a düşürdük. Çiçek artık PC'deki boyutta görünecektir. */
-        transform: scale(0.8) translateZ(-300px) !important; 
-        transform-origin: center bottom !important; 
-        perspective: 1000px !important; 
-    }
-    
-    /* 2. YUKARI KONUMLANDIRMA (BOTTOM AYARI) */
-    .flower { 
-        bottom: 0% !important; 
-        left: 50% !important; 
-        
-        /* ⚠️ YUKARI KAYDIRMA: -250% yapıldı. */
-        /* Çiçeği kendi yüksekliğinin 2.5 katı kadar yukarı çeker. Bu, en üst konuma yaklaştırır. */
-        transform: translateX(-50%) translateY(-250%) !important; 
-        
-        transform-origin: center center !important; 
-    }
-}
+        @media (max-width: 768px) {
+            /* 1. BOYUT KÜÇÜLTME VE YAPRAK SORUNU ÇÖZÜMÜ */
+            .flowers { 
+                /* Uzun/Büyük görünme sorununu çözmek için PC'den bile küçük (0.8) */
+                transform: scale(0.8) translateZ(-300px) !important; 
+                transform-origin: center bottom !important; 
+                perspective: 1000px !important; 
+            }
+            
+            /* 2. YUKARI KONUMLANDIRMA */
+            .flower { 
+                bottom: 0% !important; 
+                left: 50% !important; 
+                
+                /* YUKARI KAYDIRMA: -250% ile en üst konuma yaklaştırıldı. */
+                transform: translateX(-50%) translateY(-250%) !important; 
+                
+                transform-origin: center center !important; 
+            }
+        }
 
         /* ----- ÇİÇEK ANİMASYONU CSS'İNİN GERİ KALANI (HİÇ DEĞİŞMEYEN KISIM) ----- */
         .night { position: fixed; left: 50%; top: 0; transform: translateX(-50%); width: 100%; height: 100%; filter: blur(0.1vmin); }
@@ -216,7 +224,7 @@
         .growing-grass { animation: growing-grass-ans 1s 2s backwards; }
         @keyframes growing-grass-ans { 0% { transform: scale(0); } }
         .not-loaded * { animation-play-state: paused !important; }
-        /* ----- ÇİÇEK ANİMASYONU CSS'İ BİTİYOR ----- */
+        /* ----- ÇİÇEK ANİMASYONU CSS'İNİN GERİ KALANI BİTİYOR ----- */
     </style>
 </head>
 <body>
