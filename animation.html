@@ -32,20 +32,27 @@
         
         /* --- MOBİL AYARLAR (Media Query: Maksimum 768px genişlik için) --- */
     @media (max-width: 768px) {
-    /* Çiçeğin mobil boyutu (Hala küçük geliyorsa 1.4, 1.5 gibi değerlere çıkarabilirsiniz) */
+    /* 1. BOYUTU KONTROL ETMEK İÇİN (1.3 hâlâ küçük gelirse yükseltin) */
     .flowers { 
-        transform: scale(1.3); 
+        transform: scale(1.3) !important; 
     }
     
-    /* Çiçeği tam ortalamak için flower sınıfını güncelliyoruz */
+    /* 2. KONUMU KONTROL ETMEK İÇİN (Çiçeğin kendisi) */
     .flower { 
-        /* Dikey Ortalamayı Garanti Eder */
-        bottom: 35%; 
-        transform: translateY(50%); 
-
-        /* Yatay Ortalamayı Garanti Eder */
-        left: 50%;
-        transform: translateX(-50%) translateY(50%); /* Dikey transform ile birleştirildi */
+        /* Bütün kaydırma ayarlarını sıfırlayıp yeniden ayarlıyoruz: */
+        
+        /* Çiçeğin alt kenarını ekranın %35'ine sabitle (Daha yukarıya ittik) */
+        bottom: 35% !important; 
+        
+        /* Çiçeği yatayda merkeze (left: 50%) aldıktan sonra kendi genişliğinin yarısı kadar sola kaydırır */
+        left: 50% !important; 
+        
+        /* Dikey konumlandırmayı tamamlar (kendi yüksekliğinin yarısı kadar yukarı) */
+        /* Ek olarak yatay hizalamayı (translateX(-50%)) koruduk */
+        transform: translateX(-50%) translateY(50%) !important; 
+        
+        /* Bazı eski animasyon kodlarında transform-origin altta kalmış olabilir, onu da düzeltelim. */
+        transform-origin: center center !important; 
     }
 }
 
