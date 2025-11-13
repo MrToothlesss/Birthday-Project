@@ -8,21 +8,27 @@ let currentAudio = null;
 // =======================================================
 function playMusic(trackId) {
     const audio = document.getElementById(trackId);
-    if (currentAudio && currentAudio !== audio) {
-        currentAudio.pause();
-    }
+    // Diğer sesleri durdurmak ve butonu güncellemek için...
+    document.querySelectorAll('.music-track').forEach(t => {
+        const button = document.querySelector(`[onclick="playMusic('${t.id}')"]`);
+        if (t !== audio && !t.paused) {
+            t.pause();
+            t.currentTime = 0;
+            if (button) button.textContent = "Müziği Başlat / Duraklat";
+        }
+    });
+
+    const button = document.querySelector(`[onclick="playMusic('${trackId}')"]`);
     if (audio.paused) {
-        document.querySelectorAll('.music-track').forEach(track => {
-            if (track !== audio) {
-                track.currentTime = 0;
-            }
-        });
         audio.play().catch(error => {
             console.error("Müzik çalma engellendi: ", error);
+            if (button) button.textContent = "Müzik Başlatılamadı";
         });
+        if (button) button.textContent = "Çalıyor... Duraklat";
         currentAudio = audio;
     } else {
         audio.pause();
+        if (button) button.textContent = "Müziği Başlat / Duraklat";
         currentAudio = null;
     }
 }
@@ -62,7 +68,6 @@ function showMainContent() {
     document.body.classList.add('page-loaded');
 
     // 3. KRİTİK: URL'yi temizle (Yenilemede tekrar şifre sorması için)
-    // Bu, tarayıcının adres çubuğundan ?passed=true'yu kaldırır.
     const cleanUrl = window.location.pathname;
     history.replaceState(null, '', cleanUrl); 
 }
@@ -80,20 +85,19 @@ function checkPassword() {
         return; 
     }
 
-    // 2. ŞİFRE İSTEME: İlk defa açılıyorsa veya URL temizse
-    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. Ben biliyorum Ama söylemicem İpucu: Çiçek :)");
+    // 2. ŞİFRE İSTEME: Orijinal prompt mesajı korundu
+    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. Ben biliyorum Ama söylemicem İpucu: Çiçek :)");
 
-    if (passwordAttempt === CORRECT_PASSWORD) {
-        alert("Giriş başarılı! Animasyon yükleniyor... ❤️");
-        // Şifre doğruysa, animasyon sayfasına yönlendir.
-        window.location.replace("animation.html"); 
-    } else if (passwordAttempt !== null && passwordAttempt !== "") {
-        alert("Üzgünüm, kod yanlış. Lütfen tekrar dene.");
-        checkPassword(); 
-    } else {
-        // Kullanıcı İptal'e bastıysa
-        document.body.innerHTML = "<h1 style='text-align:center; padding-top: 100px; color: #ff69b4;'>Bu sayfa gizlidir.</h1><p style='text-align:center; color: #f0f0f0;'>Lütfen doğru kodu bilerek tekrar deneyin.</p>";
-    }
+    if (passwordAttempt === CORRECT_PASSWORD) {
+        // İSTENEN DÜZELTME: Başarı alert'i ve tekrar butona basma kaldırıldı
+        window.location.replace("animation.html"); 
+    } else if (passwordAttempt !== null && passwordAttempt !== "") {
+        alert("Üzgünüm, kod yanlış. Lütfen tekrar dene.");
+        checkPassword(); // Yanlışsa tekrar sor
+    } else {
+        // Kullanıcı İptal'e bastıysa
+        document.body.innerHTML = "<h1 style='text-align:center; padding-top: 100px; color: #ff69b4;'>Bu sayfa gizlidir.</h1><p style='text-align:center; color: #f0f0f0;'>Lütfen doğru kodu bilerek tekrar deneyin.</p>";
+    }
 }
 
 // Sayfa yüklendiğinde şifre kontrolünü hemen başlat (Erken çalışması için)
