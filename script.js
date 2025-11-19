@@ -86,7 +86,7 @@ function checkPassword() {
     }
 
     // 2. ŞİFRE İSTEME: Orijinal prompt mesajı korundu
-    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. Ben biliyorum Ama söylemicem İpucu: Çiçek :)");
+    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. İpucu: En sevdiğin çiçek. :)");
 
     if (passwordAttempt === CORRECT_PASSWORD) {
         // İSTENEN DÜZELTME: Başarı alert'i ve tekrar butona basma kaldırıldı
