@@ -89,7 +89,7 @@ function checkPassword() {
     let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. İpucu: En sevdiğin çiçek. :)");
 
     if (passwordAttempt === CORRECT_PASSWORD) {
-        // İSTENEN DÜZELTME: Başarı alert'i ve tekrar butona basma kaldırıldı
+        // ⚠️ FLAŞ PROBLEMİ ÇÖZÜMÜ: Başarılıysa alert'i ve ana içeriği gösterme komutlarını kaldırıp DİREKT yönlendiriyoruz.
         window.location.replace("animation.html"); 
     } else if (passwordAttempt !== null && passwordAttempt !== "") {
         alert("Üzgünüm, kod yanlış. Lütfen tekrar dene.");
@@ -100,5 +100,14 @@ function checkPassword() {
     }
 }
 
-// Sayfa yüklendiğinde şifre kontrolünü hemen başlat (Erken çalışması için)
-document.addEventListener('DOMContentLoaded', checkPassword);
+// Sayfa yüklendiğinde şifre kontrolünü hemen başlat
+document.addEventListener('DOMContentLoaded', () => {
+    // Container'ın varsayılan olarak gizlenmesi, şifre sorulmadan içeriğin görünmesini engeller.
+    const container = document.getElementById('container');
+    if (container) {
+        container.style.display = 'none';
+    }
+    
+    // Şifre kontrolünü başlat
+    checkPassword();
+});
