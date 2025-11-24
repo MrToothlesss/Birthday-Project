@@ -1,212 +1,211 @@
-// script.js
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const CORRECT_PASSWORD = "Zambak"; 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-let currentTrack = null;
-let isMusicPlaying = false; // Müzik durumunu takip etmek için yeni değişken
-
-// =======================================================
-// Müzik Çalma Fonksiyonu
-// =======================================================
-function playMusic(trackId) {
-    const audio = document.getElementById(trackId);
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Özel Bir Mesaj</title>
+    <link rel="stylesheet" href="syle.css">
     
-    // Diğer sesleri durdurmak ve butonu güncellemek için...
-    document.querySelectorAll('.music-track').forEach(t => {
-        const button = document.querySelector(`[onclick="playMusic('${t.id}')"]`);
-        if (t !== audio && !t.paused) {
-            t.pause();
-            t.currentTime = 0;
-            if (button) button.textContent = "Müziği Başlat / Duraklat";
-            localStorage.removeItem('playingTrackId');
+    <style>
+        .resume-music-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 8px 12px;
+            background-color: #ff69b4; /* Pembe */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            display: none; /* Varsayılan olarak gizli */
+            font-weight: bold;
         }
-    });
-
-    const button = document.querySelector(`[onclick="playMusic('${trackId}')"]`);
-    if (audio.paused) {
-        audio.play().then(() => {
-            localStorage.setItem('playingTrackId', trackId);
-            localStorage.setItem('playbackTime', audio.currentTime);
-            if (button) button.textContent = "Çalıyor... Duraklat";
-            currentTrack = audio;
-            isMusicPlaying = true; // Müzik çalıyor
-        }).catch(error => {
-            console.error("Müzik çalma engellendi: ", error);
-            if (button) button.textContent = "Müzik Başlatılamadı (Tekrar Deneyin)";
-            isMusicPlaying = false;
-        });
-    } else {
-        audio.pause();
-        localStorage.removeItem('playingTrackId');
-        if (button) button.textContent = "Müziği Başlat / Duraklat";
-        currentTrack = null;
-        isMusicPlaying = false; // Müzik durdu
-    }
-}
-
-// =======================================================
-// Müzik Durumunu Kaydetme Fonksiyonu
-// =======================================================
-function saveMusicState() {
-    if (currentTrack && !currentTrack.paused) {
-        localStorage.setItem('playbackTime', currentTrack.currentTime);
-    }
-}
-
-// =======================================================
-// Müzik Durumunu Geri Yükleme Fonksiyonu
-// =======================================================
-function restoreMusicState() {
-    const trackId = localStorage.getItem('playingTrackId');
-    const time = parseFloat(localStorage.getItem('playbackTime'));
+    </style>
+</head>
+<body> 
     
-    if (trackId && !isNaN(time) && document.getElementById(trackId)) {
-        const audio = document.getElementById(trackId);
-        const button = document.querySelector(`[onclick="playMusic('${trackId}')"]`);
+    <div id="container"> 
         
-        audio.currentTime = time;
-        audio.play().then(() => {
-            currentTrack = audio;
-            isMusicPlaying = true; // Geri yüklendi
-            if (button) button.textContent = "Çalıyor... Duraklat";
-        }).catch(error => {
-            console.warn("Otomatik müzik geri yükleme engellendi (Mobil Kısıtlama): ", error);
-            if (button) button.textContent = "Devam Etmek İçin Tekrar Tıklayın";
-            isMusicPlaying = false; // Başarısız oldu
-        });
-    }
-}
+        <button class="resume-music-btn" id="resume-music-btn" onclick="resumeExternalMusic()">
+            🎧 Müziğe Devam Et
+        </button>
+        <div id="page1" class="page active-page">
+            <div class="content-box">
+                <h1>Doğum Günün Kutlu Olsunn BEYZAAA! 💖</h1>
+                <p>Tahmin edebileceğin gibi, bu senin için hazırladığım küçük bir kaçış molası. Lütfen acele etme. Bu, sadece senin huzurun için. <br><br> Hadi, biraz ilerle.</p>
+                <img src="Gifs/happy-birthday-stitch-unscreen.gif" alt="Stitch Doğum Günü" class="page-gif">
+                <div class="navigation">
+                    <button onclick="changePage(2)">Başla</button>
+                </div>
+            </div>
+        </div>
 
-// =======================================================
-// Sayfa Geçiş Fonksiyonu (KRİTİK GÜNCELLEME)
-// =======================================================
-function changePage(pageNumber) {
-    
-    // Eğer Sayfa 3'ten Sayfa 4'e geçiliyorsa, müziği kontrol et
-    if (pageNumber === 4 && document.getElementById('page3').classList.contains('active-page')) {
-        // Kontrol: Müzik çalıyor mu? Veya müzik çalmayı denedik mi?
-        const currentAudioElement = document.getElementById(localStorage.getItem('playingTrackId'));
-        
-        // Müzik çalmayı deneyen veya çalan bir element yoksa
-        if (!isMusicPlaying || (currentAudioElement && currentAudioElement.paused)) {
-            // Uyarıyı Sayfa 3'teki başlığın altına yazdır
-            const musicContainer = document.querySelector('#page3 .content-box');
-            let warning = document.getElementById('music-warning-message');
-            
-            if (!warning) {
-                 warning = document.createElement('p');
-                 warning.id = 'music-warning-message';
-                 warning.style.color = '#ff69b4';
-                 warning.style.fontWeight = 'bold';
-                 warning.textContent = "Lütfen önce bir müzik seçin ve başlatın. Bu, mesajın duygusal akışı için önemlidir!";
-                 musicContainer.insertBefore(warning, musicContainer.querySelector('.music-player-container'));
-            }
-            
-            // Eğer müzik çalmayı denedi ama başarısız olduysa bile geçişe izin verme
-            return; 
-        } else {
-            // Uyarı mesajını temizle (varsa)
-            const warning = document.getElementById('music-warning-message');
-            if (warning) warning.remove();
-        }
-    }
-    
-    // Diğer sayfa geçiş işlemleri
-    saveMusicState();
-    
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.add('hidden-page');
-        page.classList.remove('active-page');
-    });
-    
-    const nextPage = document.getElementById('page' + pageNumber);
-    if (nextPage) {
-        nextPage.classList.remove('hidden-page');
-        nextPage.classList.add('active-page');
-        
-        // Müzik sayfasına (page 3) dönerken durumu geri yükle
-        if (pageNumber === 3) {
-            restoreMusicState();
-        }
-    }
-    
-    window.scrollTo({
-        top: 0,
-        behavior: 'instant' 
-    });
-}
+        <div id="page2" class="page hidden-page">
+            <div class="content-box">
+                <h2>Bir Dilek Tutma Zamanı 🎂</h2>
+                <img src="Gifs/cake-unscreen.gif" alt="Animasyonlu Pasta" class="page-gif cake-gif">
+                <p class="strong-text">May all your biggest dreams come true. (En büyük hayallerin gerçek olsun.)</p>
+                <p>Umarım bu yıl tüm dileklerin gerçekleşir. Biliyorum, o dileklerin arasında kariyer hedeflerin ve huzur var.</p>
+                <div class="navigation navigation-small">
+                    <button onclick="changePage(1)" class="back-button">Geri Dön</button>
+                    <button onclick="changePage(3)">Devam</button>
+                </div>
+            </div>
+        </div>
+                
+        <div id="page3" class="page hidden-page">
+            <div class="content-box">
+                <h2>Önce Huzur, Sonra Mesaj 🎧</h2>
+                <p>Biliyorum, şu an odaklanman gereken çok önemli işlerin var. Bu yüzden, mesajımı okumaya başlamadan önce "sana en iyi gelen müziğini" seçebilirsin.</p>
+                            
+                <div class="music-player-container">
+                    <h3>Huzur Müziği Seçimi (Kontrol Sende)</h3>
+                                
+                    <h4>1. Duygusal Başlangıç/Hatırlanma (New West - Those Eyes)</h4>
+                    <button onclick="playMusic('track1')" class="music-play-button">Müziği Başlat / Duraklat</button>
+                    <audio id="track1" class="music-track" src="Mp3 Musics/New West - Those Eyes.mp3" ></audio>
+                                
+                    <h4>2. Bağlılık ve İstek (Arctic Monkeys - I Wanna Be Yours)</h4>
+                    <button onclick="playMusic('track2')" class="music-play-button">Müziği Başlat / Duraklat</button>
+                    <audio id="track2" class="music-track" src="Mp3 Musics/Arctic Monkeys - I Wanna Be Yours.mp3" ></audio>
+                                
+                    <h4>3. Huzurlu Bekleyiş/Romantik Hüzün (Cigarettes After Sex - Apocalypse)</h4>
+                    <button onclick="playMusic('track3')" class="music-play-button">Müziği Başlat / Duraklat</button>
+                    <audio id="track3" class="music-track" src="Mp3 Musics/Cigarettes After Sex - Apocalypse.mp3" ></audio>
 
-// =======================================================
-// Diğer Fonksiyonlar (Aynı Kalır)
-// =======================================================
+                    <h4>4. O İlk Anılarımız ve Ekim Ayı Macerası (We Fell In Love In October)</h4>
+                    <button onclick="playMusic('track4')" class="music-play-button">Müziği Başlat / Duraklat</button>
+                    <audio id="track4" class="music-track" src="Mp3 Musics/Girl In Red - We Fell In Love In October.mp3" ></audio>
 
-function saveMusicState() {
-    if (currentTrack && !currentTrack.paused) {
-        localStorage.setItem('playbackTime', currentTrack.currentTime);
-    }
-}
+                    <h4>5. Sarsılmaz Bağlılık (Stephen Sanchez - Until I Found You)</h4>
+                    <button onclick="playMusic('track5')" class="music-play-button">Müziği Başlat / Duraklat</button>
+                    <audio id="track5" class="music-track" src="Mp3 Musics/Stephen Sanchez - Until I Found You.mp3" ></audio>
 
-function restoreMusicState() {
-    const trackId = localStorage.getItem('playingTrackId');
-    const time = parseFloat(localStorage.getItem('playbackTime'));
-    
-    if (trackId && !isNaN(time) && document.getElementById(trackId)) {
-        const audio = document.getElementById(trackId);
-        const button = document.querySelector(`[onclick="playMusic('${trackId}')"]`);
-        
-        audio.currentTime = time;
-        audio.play().then(() => {
-            currentTrack = audio;
-            isMusicPlaying = true;
-            if (button) button.textContent = "Çalıyor... Duraklat";
-        }).catch(error => {
-            console.warn("Otomatik müzik geri yükleme engellendi (Mobil Kısıtlama): ", error);
-            if (button) button.textContent = "Devam Etmek İçin Tekrar Tıklayın";
-            isMusicPlaying = false;
-        });
-    }
-}
+                    <p class="music-warning-note">
+                        **Önemli Not:** Müziğin tamamını dinleyebilirsin. Butona basarak başlatabilir, aynı butona basarak duraklatabilirsin.
+                    </p>
+                </div>
 
-function showMainContent() {
-    const container = document.getElementById('container');
-    if (container) {
-        container.style.display = 'block';
-    } 
-    
-    document.body.classList.add('page-loaded');
+                <div class="navigation navigation-small">
+                    <button onclick="changePage(2)" class="back-button">Geri Dön</button>
+                    <button onclick="changePage(4)">Şimdi Oku</button>
+                </div>
+            </div>
+        </div>
+                
+        <div id="page4" class="page hidden-page">
+            <div class="content-box">
+                <h2>Sınırların, Benim Saygım ve Bir İtiraf</h2>
 
-    const cleanUrl = window.location.pathname;
-    history.replaceState(null, '', cleanUrl); 
-    
-    changePage(1); 
-}
+                <p class="strong-text" style="color: #ff69b4;">
+                    Evet, ilk buluştuğumuzda ya da konuşmamızda bana "derslerimi önemsemek zorundayım" demiştin. Ben de evet zaten ilk derslerine odaklan sonra devam ederdik demiştim. Bunu baya düşünmüştüm. Sınav zamanı geldiğinde 3-4 hafta buluşamayacağımızı, senin baya meşgul olacağını biliyordum ve gördüm. (Ama "beklemeye değerdi.")
+                </p>
+                <p class="strong-text" style="color: #a0522d;">
+                    Ben savaşmaya hazırdım, desteklemeye hazırdım. İhtiyacın olduğunda, modun düşük olduğunda arkanda olacaktım. (**Hatırlıyorum, ayrılırken bana 'sen üzülceksin' demiştin.** Ama ben sana, **'bırak ben üzüleyim, sen üzülme'** demek istedim.) Seni cidden mutlu edeceğimi de biliyordum.
+                </p>
+                <p>İlişkimizin, senin o yoğun sınav stresin ve kariyer hedefinle aynı zamana denk gelmesi bir talihsizlikti. O gün bana 'sorunun benlik olduğunu, bu dönemde ilişki yürütmek istemediğini' söylediğinde, senin dürüstlüğüne olan saygım daha da arttı.</p>
+                        
+                <p class="strong-text">Bu yüzden, hemen o günlerde seni rahatsız ettiğim için özür dilerim. İlk gerçek sevgilimdin; kaybetmek istememiştim. Hata yaptım. Bu hatanın telafisi ise senin sınırlarına saygı duymaktır.</p>
+                        
+                <p>Benim sessizliğim, sana olan ilgisizliğim değil, **sınırlarına duyduğum en büyük saygıdır.**</p>
 
-function checkPassword() {
-    
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('passed') === 'true') {
-        showMainContent(); 
-        return; 
-    }
+                <p class="final-closing">
+                    Evet, bunları belki ayrıldığımızda daha önce söylemişimdir ama "yine de söylemek istedim." Umarım bunları okuyunca tekrar senin aklında olurum. Çok özür dilerim, ama doğum günün yani sonuçta. Umarım fikrin değişirse, tekrar ilişki istersen seni bekleyeceğim. Ben de beklerken kendime odaklanmış olurum bir yandan.
+                </p>
+                        <img src="Gifs/stitch-thoughtful-unscreen.gif" alt="Düşünceli Stitch" class="page-gif">
+                <div class="navigation navigation-small">
+                    <button onclick="changePage(3)" class="back-button">Geri Dön</button>
+                    <button onclick="changePage(5)">Son Mesaj</button>
+                </div>
+            </div>
+        </div>
+                
+        <div id="page5" class="page hidden-page">
+            <div class="content-box">
+                <h2>SANA OLAN SONSUZ SÖZLERİM VE SARSILMAZ İNANCIM</h2>
+                        
+                <p>Şu an aramızdaki mesafeye rağmen, sana karşı olan **hislerimin ve bağlılığımın değişmediğini** bilmeni istiyorum. Bu, senin hırslarına ve hedeflerine duyduğun **derin saygıdan** geliyor.</p>
+                        
+                <p class="strong-text" style="color: #6a5acd;">
+                    Hatta gözlerine baktığımda bana **güven veriyor, huzur veriyor**, sanki **evdeymişim gibi** hissettiriyor. **(Ve o güzel enerjin de aynı.)** Bu yüzden ben de senin için en güvenilir liman olmak istiyorum.
+                </p>
+                
+                <p class="final-closing" style="font-style: italic; color: #a0522d;">
+                    **Dürüst olmalıyım:** Aramızdaki bu mesafenin (ve zorluğun) ne kadar ağır olduğunu görüyorum. Hatta aklıma **'Acaba varlığım sınavına zarar mı veriyor?'** veya **'Başka bir sebep mi var?'** soruları geldi. Ama şunu bil: Sebebin ne olursa olsun, sana olan saygım ve bağlılığım, bu zorluğun ötesindedir. Benim için esas olan, senin huzurun.
+                </p>
+                <p class="final-closing" style="font-style: italic; color: #a0522d;">
+                    **Sana olan dürüstlüğümün son kanıtı:** Biliyorum, daha önce bahsetmedim ama bende düşük seviyede Disleksi (okuduğumu anlama ve matematik) ve hafif ADHD belirtileri var. Bu, genel hayatımı etkilemiyor; ancak ders çalışırken aşırı stres yaratıyor ve ondan dolayı ders çalışmayı pek sevmiyorum. **(Hani kedilerin anlattığı komik Reels vardı ya, işte o benim durumumu özetliyor. <a href="https://www.instagram.com/p/DRIIOkIAsEa/" target="_blank" style="color: #ff69b4; text-decoration: underline;">Link burada.</a>)** Ayrıca, Avrupa'dan sadece babam yüzünden değil, hayatıma dair başka önemli sebeplerden dolayı da döndüğümü sana ilk defa söylüyorum. Bu detaylar, benim hayatımı yönetmeyi öğrenmemi ve her zaman daha dikkatli olmamı gerektirdi. Bu, seni sevmemi veya sana olan bağlılığımı asla etkilemeyen, sadece benim bir parçam olan küçük detaylar.
+                </p>
+                <p class="strong-text" style="color: #6a5acd;">
+                    Benim gibi biriyle, yani **senin için cidden savaşan ve uğraşan bir partneri** belki  hayatında ilk defa görüyorsun. **Senin için en değerli olanı anlıyorum: Kendi varlıklarımızı koruyarak 1+1=11 olabilmek.** Ben de seninle kendi benliğimizi kaybetmeden, birbirimizi büyüterek, **gerçekten bir gelecek görüyorum.**
+                </p>
+                <p class="strong-text">
+                    Belki gözünde boşuna uğraşıyorumdur, ama sana dürüst olmalıyım: **Benim gibi birinin senin hayatından bir daha ne zaman geçeceğini bilmiyorsun.**
+                </p>
+                
+                <p class="final-closing" style="font-weight: bold; color: #6a5acd;">
+                    Unutma, hayatımda bu kadar büyük, bu kadar detaylı bir jesti, **ilk defa senin için** yapıyorum. Bu site, sana olan bağlılığımın eşsiz olduğunun kanıtıdır.
+                </p>
+                <p class="final-closing" style="font-style: italic; color: #a0522d;">
+                    Biliyorum, sen ayrılık kararını alırken haklıydın. **Hatırlıyorum, o gün bana 'benim yüzümden buluşamıyoruz' demiştin.** Hatta o gün bana **'sen üzüleceksin'** demiştin. Ancak sana karşı tek bir pişmanlığım var: Keşke ayrılmak yerine, bu zorlu sürece uygun bir kural koysaydık. Çünkü şunu bilmeni isterim: **Seni sevip öpemiyordum belki, ama yazışmak, görüntülü konuşmak bile benim için yeterliydi, bütün dertlerimi alıp götürüyordu.** Senin sınavın için ne kadar zaman gerekse, ben o kadar beklemeye hazırdım; bir ay bile benim için sorun değildi. Bu, benim takıntılı bağlılığımın bir parçası. Ama endişelenme, bu bekleme, senin hedeflerine olan saygımdan geliyor.
+                </p>
+                <p class="final-closing" style="font-style: italic; color: #ff69b4;">
+                    Keşke bugün yanında olabilsem. Ama biliyorum ki, bu, senin sınav sürecinde duygusal bir yük yaratmaktan başka bir işe yaramazdı. Sana olan tüm saygımdan dolayı, bu mesafeyi korudum. Bu, sadece senin huzurun için.
+                </p>
+                <p class="final-closing" style="font-weight: bold; color: #a0522d;">
+                    **Unutmadım, biliyorsun.** Hani 18 olduğunda, bara ilk defa benimle gidersin demiştik ya... O gün geldiğinde, o anımızı birlikte yaşayacağız. Ne zaman istersen, ne zaman senin için doğru olursa, ben hazırım.
+                </p>
+                <p class="final-closing" style="font-style: italic; color: #a0522d;">
+                    Sınavın bittiğinde, ilk tanıştığımız zamanki gibi **istediğin kadar Reels atabilirsin.** O günlere geri dönmeyi dört gözle bekliyorum.
+                </p>
+                <p class="final-closing" style="font-style: italic; color: #ff69b4;">
+                    Sana o nefes alan Stitch peluşu almak istedim, çünkü Instagram Reels'te gördüm ve beğendiğini biliyordum. Ama buluşup da sınav stresini artırmak, sana duygusal bir baskı yapmak istemedim. O yüzden sadece bu siteyi yaptım.
+                </p>
+                <p class="final-closing" style="font-weight: bold; color: #ff69b4;">
+                    1 ay birlikteydik. O 1 aylık süreçte bile hemen seninle evlenirdim, o kesindi. :)
+                </p>
+                <p class="final-closing" style="font-style: italic; color: #a0522d;">
+                    **Unutamadığım bir anı:** Biliyor musun, saçının kokusunu benden başkası bilmesin isterdim. Seni her gördüğümde o kokuyu unutmak istemediğim için çokça içime çekiyordum.
+                </p>
+                <p class="final-closing" style="font-style: italic; color: #a0522d;">
+                    Biliyorum, ilişkimiz tartışma veya kavga aşamasına hiç gelmedi; ne sen benim o yanımı gördün, ne de ben senin. Ama sana dürüst olmalıyım: O yanlarını görmüş olsam bile, seni seveceğimden ve sana bağlı kalacağımdan eminim. Benim sana olan inancım o kadar sarsılmazdı.
+                </p>
+                <p class="final-closing" style="font-weight: bold; color: #6a5acd;">
+                    Senin o derslerine gösterdiğin inanılmaz disiplin, hedeflerin ve kararlılığınla tarif edilemez derecede gurur duyuyorum. Benim bu bekleyişim, sadece sana duyduğum bu koşulsuz gururla birlikte. Ve şunu bilmeni isterim ki, ben seninle sadece bir gelecek hayal etmedim, o geleceğe inanıyorum. Seninle cidden gurur duyduğumu bilmeni isterim, Beyza.
+                </p>
+                <p>Benim için esas olan, her zaman senin arkanda durmaktır. Söz veriyorum; ben, senin bu zorlu mücadeledeki en sağlam, **güvenebileceğin ve ağlayabileceğin bir omuz** olmak istiyorum.</p>
+                        
+                <p class="final-closing">
+                    Biliyorum, etrafında güvendiğin yakın arkadaşların var. Ama şunu da bil ki, **cidden büyük bir derdin olursa, acil bir durum yaşarsan ya da sadece kendini yalnız hissedersen, aramaktan ya da yazmaktan hiç çekinme.** **Overthinking yaparsan da beni arayabilirsin.** Ben her zaman ulaşılabilirim ve seni dinlemeye hazırım.
+                </p>
 
-    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. İpucu: En sevdiğin çiçek. :)");
+                <p class="final-closing">
+                    Sınav baskın azaldığında ya da YKS sonrası **hazır hissettiğinde**, benim burada olacağımı biliyorsun. **Senin için her zaman beklemeye değerim.** Eğer o gün gelirse, birbirimizi hiç tanışmamış gibi her şeye sıfırdan başlayarak bir şans daha verebiliriz.
+                </p>
 
-    if (passwordAttempt === CORRECT_PASSWORD) { 
-        window.location.replace("animation.html"); 
-    } else if (passwordAttempt !== null && passwordAttempt !== "") {
-        alert("Üzgünüm, kod yanlış. Lütfen tekrar dene.");
-        checkPassword(); 
-    } else {
-        document.body.innerHTML = "<h1 style='text-align:center; padding-top: 100px; color: #ff69b4;'>Bu sayfa gizlidir.</h1><p style='text-align:center; color: #f0f0f0;'>Lütfen doğru kodu bilerek tekrar deneyin.</p>";
-    }
-}
+                <p class="final-closing">
+                    Hayat seni benden başka bir yere götürürse ve bir başkası girerse hayatına, emin ol ki buna da **en büyük saygıyı göstereceğim.**
+                </p>
+                
+                <p class="final-closing" style="font-weight: bold; color: #ff69b4;">
+                    Ama şunu bil ki, ben senden başkasını istemiyorum. Benim için beklemeye değer olan tek kişi sensin.
+                    <br>
+                    Eğer başka bir gezegende olsaydım, ya da evrende birden fazla sen olsaydı, yine de her zaman seni seçerdim.
+                </p>
+                <p class="final-closing">
+                    Aslında sana anlatmak istediğim daha çok şey vardı, ama zamanını almamak adına onlar şimdilik bende kalsın. Umarım bu jest, omuzlarındaki baskıyı az da olsa hafifletmiştir. Tekrar iyi ki doğdun, Beyza. **Kendine çok dikkat et.** Görüşmek üzere.
+                </p>
+                <p class="signature">- Love Yiğit (Spiderman)</p>
+                <img src="Gifs/stitch-success-unscreen.gif" alt="Başarılı Stitch" class="page-gif">
+                        
+                <div class="navigation navigation-small">
+                    <button onclick="changePage(4)" class="back-button">Geri Dön</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('container');
-    if (container) {
-        container.style.display = 'none';
-    }
-    checkPassword();
-});
+    <script src="script.js"></script>
+</body>
+</html>
