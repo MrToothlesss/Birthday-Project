@@ -1,13 +1,18 @@
 // script.js
 
-const CORRECT_PASSWORD = "Zambak";
-let currentAudio = null;
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// KULLANICININ ŞİFRE DEĞERİ KORUNDU
+const CORRECT_PASSWORD = "Zambak"; 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+let currentTrack = null;
 
 // =======================================================
 // Müzik Çalma Fonksiyonu
 // =======================================================
 function playMusic(trackId) {
     const audio = document.getElementById(trackId);
+    
     // Diğer sesleri durdurmak ve butonu güncellemek için...
     document.querySelectorAll('.music-track').forEach(t => {
         const button = document.querySelector(`[onclick="playMusic('${t.id}')"]`);
@@ -15,28 +20,71 @@ function playMusic(trackId) {
             t.pause();
             t.currentTime = 0;
             if (button) button.textContent = "Müziği Başlat / Duraklat";
+            localStorage.removeItem('playingTrackId');
         }
     });
 
     const button = document.querySelector(`[onclick="playMusic('${trackId}')"]`);
     if (audio.paused) {
-        audio.play().catch(error => {
+        audio.play().then(() => {
+            // Başarılı çalma durumunda bilgileri kaydet
+            localStorage.setItem('playingTrackId', trackId);
+            localStorage.setItem('playbackTime', audio.currentTime);
+            if (button) button.textContent = "Çalıyor... Duraklat";
+            currentTrack = audio;
+        }).catch(error => {
             console.error("Müzik çalma engellendi: ", error);
-            if (button) button.textContent = "Müzik Başlatılamadı";
+            if (button) button.textContent = "Müzik Başlatılamadı (Tekrar Deneyin)";
         });
-        if (button) button.textContent = "Çalıyor... Duraklat";
-        currentAudio = audio;
     } else {
         audio.pause();
+        localStorage.removeItem('playingTrackId');
         if (button) button.textContent = "Müziği Başlat / Duraklat";
-        currentAudio = null;
+        currentTrack = null;
     }
 }
 
 // =======================================================
-// Sayfa Geçiş Fonksiyonu
+// Müzik Durumunu Kaydetme Fonksiyonu (Sayfadan Ayrılırken)
+// =======================================================
+function saveMusicState() {
+    // Sadece aktif olarak çalan bir parça varsa zamanı kaydet
+    if (currentTrack && !currentTrack.paused) {
+        localStorage.setItem('playbackTime', currentTrack.currentTime);
+    }
+}
+
+// =======================================================
+// Müzik Durumunu Geri Yükleme Fonksiyonu (Müzik sayfasına dönerken)
+// =======================================================
+function restoreMusicState() {
+    const trackId = localStorage.getItem('playingTrackId');
+    const time = parseFloat(localStorage.getItem('playbackTime'));
+    
+    // Daha önce çalmakta olan bir parça varsa
+    if (trackId && !isNaN(time) && document.getElementById(trackId)) {
+        const audio = document.getElementById(trackId);
+        const button = document.querySelector(`[onclick="playMusic('${trackId}')"]`);
+        
+        audio.currentTime = time;
+        audio.play().then(() => {
+            currentTrack = audio;
+            if (button) button.textContent = "Çalıyor... Duraklat";
+        }).catch(error => {
+            // Mobil cihazlarda otomatik çalma engellenirse butonu bilgilendir
+            console.warn("Otomatik müzik geri yükleme engellendi (Mobil Kısıtlama): ", error);
+            if (button) button.textContent = "Devam Etmek İçin Tekrar Tıklayın";
+        });
+    }
+}
+
+// =======================================================
+// Sayfa Geçiş Fonksiyonu (KRİTİK GÜNCELLEME)
 // =======================================================
 function changePage(pageNumber) {
+    // Sayfadan ayrılırken müzik durumunu kaydet
+    saveMusicState();
+    
     document.querySelectorAll('.page').forEach(page => {
         page.classList.add('hidden-page');
         page.classList.remove('active-page');
@@ -46,6 +94,11 @@ function changePage(pageNumber) {
     if (nextPage) {
         nextPage.classList.remove('hidden-page');
         nextPage.classList.add('active-page');
+        
+        // Müzik sayfasına (page 3) dönerken durumu geri yükle
+        if (pageNumber === 3) {
+            restoreMusicState();
+        }
     }
     
     window.scrollTo({
@@ -70,6 +123,9 @@ function showMainContent() {
     // 3. KRİTİK: URL'yi temizle (Yenilemede tekrar şifre sorması için)
     const cleanUrl = window.location.pathname;
     history.replaceState(null, '', cleanUrl); 
+    
+    // İçerik gösterildikten sonra Sayfa 1'e geç
+    changePage(1); 
 }
 
 
@@ -88,8 +144,9 @@ function checkPassword() {
     // 2. ŞİFRE İSTEME: Orijinal prompt mesajı korundu
     let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. İpucu: En sevdiğin çiçek. :)");
 
-    if (passwordAttempt === CORRECT_PASSWORD) {
-        // ⚠️ FLAŞ PROBLEMİ ÇÖZÜMÜ: Başarılıysa alert'i ve ana içeriği gösterme komutlarını kaldırıp DİREKT yönlendiriyoruz.
+    // KRİTİK NOT: Şifre kontrolü case-sensitive (Büyük/Küçük harf duyarlı)
+    if (passwordAttempt === CORRECT_PASSWORD) { 
+        // Başarılıysa alert'i ve ana içeriği gösterme komutlarını kaldırıp DİREKT yönlendiriyoruz.
         window.location.replace("animation.html"); 
     } else if (passwordAttempt !== null && passwordAttempt !== "") {
         alert("Üzgünüm, kod yanlış. Lütfen tekrar dene.");
