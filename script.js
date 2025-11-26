@@ -1,12 +1,11 @@
 // script.js
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// KULLANICININ NİHAİ ŞİFRE DEĞERİ
 const CORRECT_PASSWORD = "Zambak"; 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 let currentTrack = null;
-let isMusicPlaying = false; // Müzik durumunu takip etmek için yeni değişken
+let isMusicPlaying = false; 
 
 // =======================================================
 // Müzik Çalma Fonksiyonu
@@ -49,43 +48,39 @@ function playMusic(trackId) {
 }
 
 // =======================================================
-// Müzik Durumunu Kaydetme Fonksiyonu (Sayfadan Ayrılırken)
+// Müzik Durumunu Kaydetme Fonksiyonu
 // =======================================================
 function saveMusicState() {
-    // Sadece aktif olarak çalan bir parça varsa zamanı kaydet
     if (currentTrack && !currentTrack.paused) {
         localStorage.setItem('playbackTime', currentTrack.currentTime);
     }
 }
 
 // =======================================================
-// Müzik Durumunu Geri Yükleme Fonksiyonu (Müzik sayfasına dönerken)
+// Müzik Durumunu Geri Yükleme Fonksiyonu (OTOMATİK OYNATMAYI ENGELLEMEK İÇİN GÜNCELLENDİ)
 // =======================================================
 function restoreMusicState() {
     const trackId = localStorage.getItem('playingTrackId');
     const time = parseFloat(localStorage.getItem('playbackTime'));
     
-    // Daha önce çalmakta olan bir parça varsa
     if (trackId && !isNaN(time) && document.getElementById(trackId)) {
         const audio = document.getElementById(trackId);
         const button = document.querySelector(`[onclick="playMusic('${trackId}')"]`);
         
         audio.currentTime = time;
-        audio.play().then(() => {
-            currentTrack = audio;
-            isMusicPlaying = true; // Geri yüklendi
-            if (button) button.textContent = "Çalıyor... Duraklat";
-        }).catch(error => {
-            // Mobil cihazlarda otomatik çalma engellenirse butonu bilgilendir
-            console.warn("Otomatik müzik geri yükleme engellendi (Mobil Kısıtlama): ", error);
-            if (button) button.textContent = "Devam Etmek İçin Tekrar Tıklayın";
-            isMusicPlaying = false; // Başarısız oldu
-        });
+        // audio.play() komutu kaldırıldı! Sadece zamanı yükle ve butonu hazırla.
+        
+        currentTrack = audio;
+        isMusicPlaying = false; // Kullanıcı tıklamadığı sürece FALSE kalmalı
+        
+        if (button) {
+            button.textContent = "Kaldığı Yerden Başlat"; // Yeni bir prompt verelim
+        }
     }
 }
 
 // =======================================================
-// Sayfa Geçiş Fonksiyonu (KRİTİK GÜNCELLEME)
+// Sayfa Geçiş Fonksiyonu
 // =======================================================
 function changePage(pageNumber) {
     
