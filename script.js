@@ -57,7 +57,7 @@ function saveMusicState() {
 }
 
 // =======================================================
-// Müzik Durumunu Geri Yükleme Fonksiyonu (OTOMATİK OYNATMAYI ENGELLEMEK İÇİN GÜNCELLENDİ)
+// Müzik Durumunu Geri Yükleme Fonksiyonu (OTOMATİK OYNATMAYI ENGELLEMEK İÇİN)
 // =======================================================
 function restoreMusicState() {
     const trackId = localStorage.getItem('playingTrackId');
@@ -68,19 +68,19 @@ function restoreMusicState() {
         const button = document.querySelector(`[onclick="playMusic('${trackId}')"]`);
         
         audio.currentTime = time;
-        // audio.play() komutu kaldırıldı! Sadece zamanı yükle ve butonu hazırla.
+        // audio.play() komutu kaldırıldı. Sadece zamanı yükle ve butonu hazırla.
         
         currentTrack = audio;
         isMusicPlaying = false; // Kullanıcı tıklamadığı sürece FALSE kalmalı
         
         if (button) {
-            button.textContent = "Kaldığı Yerden Başlat"; // Yeni bir prompt verelim
+            button.textContent = "Kaldığı Yerden Başlat"; 
         }
     }
 }
 
 // =======================================================
-// Sayfa Geçiş Fonksiyonu
+// Sayfa Geçiş Fonksiyonu (KRİTİK GÜNCELLEME)
 // =======================================================
 function changePage(pageNumber) {
     
