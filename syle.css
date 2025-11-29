@@ -1,4 +1,4 @@
-/* style.css - NİHAİ VERSİYON (PC STABİLİZASYONLU) */
+/* style.css - NİHAİ VERSİYON (İÇERİK VE GIF KİLİTLENDİ) */
 
 /* --- TEMEL CSS SIFIRLAMA --- */
 *, *::after, *::before { padding: 0; margin: 0; box-sizing: border-box; }
@@ -18,7 +18,7 @@ body {
     background-color: #000000; /* Başlangıçta Siyah Arka Plan */
     position: relative; 
     
-    /* K R İ T İ K: PC STABİLİZASYONU İÇİN FLEX KODLARI KALDIRILDI */
+    /* PC STABİLİZASYONU İÇİN FLEX KODLARI KALDIRILDI */
     /* display: flex; */
     /* justify-content: center; */
     /* align-items: center; */  
@@ -46,11 +46,11 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     
-    /* GENİŞLİK KORUNDU */
+    /* GENİŞLİK/KALINLIK KORUNDU */
     max-width: 550px; 
     width: 85%; 
     
-    /* K R İ T İ K: PC'DE STABİLİZASYON İÇİN SABİT DİKEY MARJİN */
+    /* PC'DE STABİLİZASYON İÇİN SABİT DİKEY MARJİN */
     margin: 50px auto; 
     box-sizing: border-box;
     
@@ -75,18 +75,20 @@ body {
 .hidden-page { opacity: 0; display: none; }
 .active-page { display: flex; opacity: 1; animation: fadeIn 1.2s ease-out; }
 
-/* --- TİPOGRAFİ (BOŞLUKLAR VE YAZI ARALIĞI DÜZELTİLDİ) --- */
+/* --- TİPOGRAFİ (İÇERİK MERKEZLEME KİLİTLENDİ) --- */
 h1 { color: #ff69b4; margin-bottom: 20px; }
 h2 { color: #4682b4; margin-top: 0; margin-bottom: 15px; }
 
-/* K R İ T İ K: YAZI VE PARAGRAF ARALIKLARI AZALTILDI */
+/* YAZI VE PARAGRAF ARALIKLARI AZALTILDI */
 p { line-height: 1.4; margin: 8px 0; } 
 
+/* K R İ T İ K: METİN BLOKLARI MERKEZLENİYOR */
 .strong-text { font-weight: bold; color: #a0522d; font-style: italic; margin: 15px auto; padding: 0 10px; }
 .signature { margin-top: 20px; font-size: 1.1em; font-style: italic; color: #6a5acd; }
-.final-closing { font-weight: 500; color: #2e8b57; line-height: 1.4; margin: 8px 0; } 
+.final-closing { font-weight: 500; color: #2e8b57; line-height: 1.4; margin: 8px auto; } /* Margin auto eklenerek blok merkezlenmesi sağlandı */
 
 /* --- GIF ve Butonlar --- */
+/* K R İ T İ K: GIF'LERİN TAM MERKEZDE OLDUĞU GARANTİLENDİ */
 .page-gif { max-width: 80%; height: auto; margin: 20px auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); animation: pulse 4s infinite; }
 .cake-gif { max-width: 90%; }
 .navigation { margin-top: 25px; }
