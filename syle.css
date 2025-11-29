@@ -1,4 +1,4 @@
-/* style.css - NİHAİ VERSİYON (TÜM KAYMA VE HİZALAMA SORUNLARI ÇÖZÜLDÜ) */
+/* style.css - NİHAİ VERSİYON (PC STABİLİZASYONLU) */
 
 /* --- TEMEL CSS SIFIRLAMA --- */
 *, *::after, *::before { padding: 0; margin: 0; box-sizing: border-box; }
@@ -18,10 +18,10 @@ body {
     background-color: #000000; /* Başlangıçta Siyah Arka Plan */
     position: relative; 
     
-    /* K R İ T İ K: ANA İÇERİĞİ EKRANIN TAM ORTASINA ALIR */
-    display: flex;
-    justify-content: center;
-    align-items: center;     /* İçeriği dikey ve yatayda ortalar */
+    /* K R İ T İ K: PC STABİLİZASYONU İÇİN FLEX KODLARI KALDIRILDI */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */  
     
     min-height: 100vh; /* Tam ekran yüksekliğini koru */
     width: 100%; /* body genişliği %100 yapıldı */
@@ -46,22 +46,25 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     
-    /* ORİJİNAL GENİŞLİK KORUNDU */
-    max-width: 650px; 
-    width: 95%; 
+    /* GENİŞLİK KORUNDU */
+    max-width: 550px; 
+    width: 85%; 
     
-    /* Flexbox ile merkezlendiği için marjini temiz tutuyoruz */
-    margin: 20px auto; 
+    /* K R İ T İ K: PC'DE STABİLİZASYON İÇİN SABİT DİKEY MARJİN */
+    margin: 50px auto; 
     box-sizing: border-box;
     
     /* KUTU İÇİNDE METİN HİZALAMASI GARANTİLENDİ */
     text-align: center;
+    
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 /* --- SAYFA GEÇİŞİ VE GÖRÜNÜRLÜK --- */
 .page {
     transition: opacity 0.5s ease;
-    /* K R İ T İ K: MİN YÜKSEKLİK KALDIRILDI! Kısa sayfaların ekrana sığmasını sağlar. */
+    /* MİN YÜKSEKLİK KALDIRILDI! Kısa sayfaların ekrana sığmasını sağlar. */
     /* min-height: 650px; */
     display: flex;
     flex-direction: column;
@@ -81,7 +84,7 @@ p { line-height: 1.4; margin: 8px 0; }
 
 .strong-text { font-weight: bold; color: #a0522d; font-style: italic; margin: 15px auto; padding: 0 10px; }
 .signature { margin-top: 20px; font-size: 1.1em; font-style: italic; color: #6a5acd; }
-.final-closing { font-weight: 500; color: #2e8b57; line-height: 1.4; margin: 8px 0; } /* Line height ve margin eklemesi yapıldı */
+.final-closing { font-weight: 500; color: #2e8b57; line-height: 1.4; margin: 8px 0; } 
 
 /* --- GIF ve Butonlar --- */
 .page-gif { max-width: 80%; height: auto; margin: 20px auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); animation: pulse 4s infinite; }
