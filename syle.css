@@ -1,4 +1,4 @@
-/* style.css - NİHAİ VERSİYON (İÇERİK VE GIF KİLİTLENDİ) */
+/* style.css - NİHAİ VERSİYON (PC STABİLİZASYONLU) */
 
 /* --- TEMEL CSS SIFIRLAMA --- */
 *, *::after, *::before { padding: 0; margin: 0; box-sizing: border-box; }
@@ -82,10 +82,10 @@ h2 { color: #4682b4; margin-top: 0; margin-bottom: 15px; }
 /* YAZI VE PARAGRAF ARALIKLARI AZALTILDI */
 p { line-height: 1.4; margin: 8px 0; } 
 
-/* K R İ T İ K: METİN BLOKLARI MERKEZLENİYOR */
-.strong-text { font-weight: bold; color: #a0522d; font-style: italic; margin: 15px auto; padding: 0 10px; }
+/* K R İ T İ K: UZUN MESAJ BLOKLARINI KESİN MERKEZLEME */
+.strong-text { font-weight: bold; color: #a0522d; font-style: italic; margin: 15px auto; padding: 0 10px; display: block; }
 .signature { margin-top: 20px; font-size: 1.1em; font-style: italic; color: #6a5acd; }
-.final-closing { font-weight: 500; color: #2e8b57; line-height: 1.4; margin: 8px auto; } /* Margin auto eklenerek blok merkezlenmesi sağlandı */
+.final-closing { font-weight: 500; color: #2e8b57; line-height: 1.4; margin: 8px auto; display: block; } /* Block ve margin auto ile kesin merkezleme */
 
 /* --- GIF ve Butonlar --- */
 /* K R İ T İ K: GIF'LERİN TAM MERKEZDE OLDUĞU GARANTİLENDİ */
