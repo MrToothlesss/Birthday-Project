@@ -1,9 +1,8 @@
-/* style.css - NİHAİ VERSİYON (PC STABİLİZASYONLU) */
+/* style.css - NİHAİ VERSİYON (TÜM GÖRSEL HATALAR GİDERİLDİ) */
 
 /* --- TEMEL CSS SIFIRLAMA --- */
 *, *::after, *::before { padding: 0; margin: 0; box-sizing: border-box; }
 
-/* K R İ T İ K: Tarayıcıların varsayılan boşluklarını sıfırla ve tam ekranı kapla */
 html {
     margin: 0; 
     padding: 0; 
@@ -12,51 +11,43 @@ html {
     overflow-x: hidden !important; /* YATAY KAYMAYI KİLİTLER */
 }
 
-/* --- ORİJİNAL GENEL STİLLER (Ortalama ve Mobil Uyum) --- */
+/* --- ORİJİNAL GENEL STİLLER (Kritik Hizalama Fix'i) --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #000000; /* Başlangıçta Siyah Arka Plan */
-    position: relative; 
-    
-    /* PC STABİLİZASYONU İÇİN FLEX KODLARI KALDIRILDI */
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */  
-    
-    min-height: 100vh; /* Tam ekran yüksekliğini koru */
-    width: 100%; /* body genişliği %100 yapıldı */
-    margin: 0;
-    text-align: center; /* Metinlerin merkezlenmesini garanti eder */
+    background-color: #000000; /* Ana Arka Plan */
     color: #333;
-    overflow-y: auto; /* Uzun içerikler için kaydırmaya izin ver */
-    overflow-x: hidden !important; /* Yatay kaymayı kesinlikle engeller */
+
+    /* DİKEY HİZALAMA FIX'İ: İÇERİĞİ EKRANIN ORTASINA SABİTLER */
+    min-height: 100vh; /* Tam ekran yüksekliğini kapla (Renk farkını önler) */
+    display: flex; 
+    justify-content: center; /* İçeriği dikeyde ORTALA */
+    align-items: center; /* İçeriği yatayda ortala */
     
-    /* ÇİÇEĞİ TELEFONDA HAFİF YUKARI ÇEKME VE ORTALAMA */
-    padding-bottom: 5vh; 
+    width: 100%; 
+    margin: 0;
+    padding: 0; 
+    text-align: center; 
+    overflow-y: auto; 
+    overflow-x: hidden !important;
+    padding-bottom: 5vh; /* Çiçeği telefonda hafif yukarı çekme (korundu) */
 }
 
-/* Sayfa yüklendikten sonra arka planı beyaza çeviren sınıf */
-.page-loaded {
-    background-color: #F7F7FF !important;
-}
-
+/* --- ANA KUTU (CONTAINER) --- */
 #container {
     background: white;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     
-    /* GENİŞLİK/KALINLIK KORUNDU */
+    /* GENİŞLİK/ORTALAMA */
     max-width: 550px; 
     width: 85%; 
     
-    /* PC'DE STABİLİZASYON İÇİN SABİT DİKEY MARJİN */
-    margin: 50px auto; 
+    /* BODY'DEKİ FLEXBOX NEDENİYLE MARJİNİ SIFIRLIYORUZ */
+    margin: 0 auto; 
     box-sizing: border-box;
     
-    /* KUTU İÇİNDE METİN HİZALAMASI GARANTİLENDİ */
     text-align: center;
-    
     padding-top: 30px;
     padding-bottom: 30px;
 }
@@ -64,31 +55,36 @@ body {
 /* --- SAYFA GEÇİŞİ VE GÖRÜNÜRLÜK --- */
 .page {
     transition: opacity 0.5s ease;
-    /* MİN YÜKSEKLİK KALDIRILDI! Kısa sayfaların ekrana sığmasını sağlar. */
-    /* min-height: 650px; */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; Yorum satırına alındı, içerik kutusu halleder */
     align-items: center;
+    width: 100%;
+}
+
+.content-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Kutu içindeki içeriği ortala */
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
 }
 
 .hidden-page { opacity: 0; display: none; }
 .active-page { display: flex; opacity: 1; animation: fadeIn 1.2s ease-out; }
 
-/* --- TİPOGRAFİ (İÇERİK MERKEZLEME KİLİTLENDİ) --- */
+/* --- TİPOGRAFİ --- */
 h1 { color: #ff69b4; margin-bottom: 20px; }
 h2 { color: #4682b4; margin-top: 0; margin-bottom: 15px; }
-
-/* YAZI VE PARAGRAF ARALIKLARI AZALTILDI */
 p { line-height: 1.4; margin: 8px 0; } 
 
-/* K R İ T İ K: UZUN MESAJ BLOKLARINI KESİN MERKEZLEME */
 .strong-text { font-weight: bold; color: #a0522d; font-style: italic; margin: 15px auto; padding: 0 10px; display: block; }
 .signature { margin-top: 20px; font-size: 1.1em; font-style: italic; color: #6a5acd; }
-.final-closing { font-weight: 500; color: #2e8b57; line-height: 1.4; margin: 8px auto; display: block; } /* Block ve margin auto ile kesin merkezleme */
+.final-closing { font-weight: 500; color: #2e8b57; line-height: 1.4; margin: 8px auto; display: block; } 
 
 /* --- GIF ve Butonlar --- */
-/* K R İ T İ K: GIF'LERİN TAM MERKEZDE OLDUĞU GARANTİLENDİ */
 .page-gif { max-width: 80%; height: auto; margin: 20px auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); animation: pulse 4s infinite; }
 .cake-gif { max-width: 90%; }
 .navigation { margin-top: 25px; }
