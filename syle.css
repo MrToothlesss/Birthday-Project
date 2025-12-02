@@ -1,4 +1,4 @@
-/* style.css - NİHAİ VERSİYON (TÜM GÖRSEL HATALAR GİDERİLDİ) */
+/* style.css - NİHAİ VERSİYON (ZAMBAK TONU VE OPTİMİZASYON) */
 
 /* --- TEMEL CSS SIFIRLAMA --- */
 *, *::after, *::before { padding: 0; margin: 0; box-sizing: border-box; }
@@ -8,20 +8,20 @@ html {
     padding: 0; 
     width: 100%; 
     height: 100%; 
-    overflow-x: hidden !important; /* YATAY KAYMAYI KİLİTLER */
+    overflow-x: hidden !important; 
 }
 
-/* --- ORİJİNAL GENEL STİLLER (Kritik Hizalama Fix'i) --- */
+/* --- ORİJİNAL GENEL STİLLER (HİZALAMA VE RENK FIX'İ) --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #000000; /* Ana Arka Plan */
+    background-color: #F5F5FA; /* YENİ: Açık, Zambak tonlu arka plan */
     color: #333;
 
-    /* DİKEY HİZALAMA FIX'İ: İÇERİĞİ EKRANIN ORTASINA SABİTLER */
-    min-height: 100vh; /* Tam ekran yüksekliğini kapla (Renk farkını önler) */
+    /* DİKEY HİZALAMA FIX'İ */
+    min-height: 100vh; 
     display: flex; 
-    justify-content: center; /* İçeriği dikeyde ORTALA */
-    align-items: center; /* İçeriği yatayda ortala */
+    justify-content: center; 
+    align-items: center; 
     
     width: 100%; 
     margin: 0;
@@ -29,7 +29,12 @@ body {
     text-align: center; 
     overflow-y: auto; 
     overflow-x: hidden !important;
-    padding-bottom: 5vh; /* Çiçeği telefonda hafif yukarı çekme (korundu) */
+    padding-bottom: 5vh; 
+}
+
+/* Sayfa yüklendikten sonra arka plan rengi */
+.page-loaded {
+    background-color: #F5F5FA !important; /* Tutarlılık için aynı renk */
 }
 
 /* --- ANA KUTU (CONTAINER) --- */
@@ -39,11 +44,9 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     
-    /* GENİŞLİK/ORTALAMA */
     max-width: 550px; 
     width: 85%; 
     
-    /* BODY'DEKİ FLEXBOX NEDENİYLE MARJİNİ SIFIRLIYORUZ */
     margin: 0 auto; 
     box-sizing: border-box;
     
@@ -52,12 +55,11 @@ body {
     padding-bottom: 30px;
 }
 
-/* --- SAYFA GEÇİŞİ VE GÖRÜNÜRLÜK --- */
+/* --- SAYFA YAPILARI --- */
 .page {
     transition: opacity 0.5s ease;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; Yorum satırına alındı, içerik kutusu halleder */
     align-items: center;
     width: 100%;
 }
@@ -65,7 +67,7 @@ body {
 .content-box {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Kutu içindeki içeriği ortala */
+    justify-content: center; 
     align-items: center;
     text-align: center;
     padding: 20px;
@@ -75,7 +77,7 @@ body {
 .hidden-page { opacity: 0; display: none; }
 .active-page { display: flex; opacity: 1; animation: fadeIn 1.2s ease-out; }
 
-/* --- TİPOGRAFİ --- */
+/* --- TİPOGRAFİ GENEL --- */
 h1 { color: #ff69b4; margin-bottom: 20px; }
 h2 { color: #4682b4; margin-top: 0; margin-bottom: 15px; }
 p { line-height: 1.4; margin: 8px 0; } 
@@ -101,7 +103,7 @@ p { line-height: 1.4; margin: 8px 0; }
 button { background-color: #ffc0cb; color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-size: 1.05em; transition: background-color 0.3s, transform 0.2s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
 button:hover { background-color: #ff69b4; transform: translateY(-2px) scale(1.02); }
 
-/* Müzik Seçimi Ortalama ve Boşluk Düzeltmesi */
+/* Müzik Seçimi ve Butonlar */
 .music-player-container { 
     margin: 30px auto 10px auto; 
     padding: 15px; 
@@ -121,3 +123,41 @@ button:hover { background-color: #ff69b4; transform: translateY(-2px) scale(1.02
 /* KEYFRAMES ANİMASYONLARI */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+
+
+/* ======================================================= */
+/* MOBİL İÇİN KRİTİK FONT VE BOŞLUK KÜÇÜLTME */
+/* ======================================================= */
+@media (max-width: 600px) {
+    
+    #container {
+        width: 95%; 
+        padding: 15px 10px; 
+        margin: 30px auto; 
+    }
+
+    h1 {
+        font-size: 1.6em; 
+    }
+    h2 {
+        font-size: 1.3em; 
+    }
+    p, .final-closing {
+        font-size: 0.9em; 
+        line-height: 1.25; 
+    }
+    
+    button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .navigation-small {
+        margin-top: 15px; 
+        max-width: 300px; 
+    }
+    
+    .page-gif {
+        margin: 15px auto;
+        max-width: 95%;
+    }
+}
