@@ -1,19 +1,15 @@
-// script.js - FLASH HATASI GİDERİLMİŞ TAM SÜRÜM
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const CORRECT_PASSWORD = "Zambak"; 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// script.js - ŞİFRE KALDIRILMIŞ, ANİMASYON AKIŞI KORUNMUŞ TAM SÜRÜM
 
 let currentTrack = null;
 let isMusicPlaying = false; 
 
 // =======================================================
-// Müzik Çalma Fonksiyonu
+// 1. Müzik Çalma Fonksiyonu
 // =======================================================
 function playMusic(trackId) {
     const audio = document.getElementById(trackId);
     
-    // Diğer sesleri durdurmak ve butonu güncellemek için...
+    // Diğer sesleri durdurmak ve butonları güncellemek için
     document.querySelectorAll('.music-track').forEach(t => {
         const button = document.querySelector(`[onclick="playMusic('${t.id}')"]`);
         if (t !== audio && !t.paused) {
@@ -47,7 +43,7 @@ function playMusic(trackId) {
 }
 
 // =======================================================
-// Müzik Durumunu Kaydetme Fonksiyonu
+// 2. Müzik Durumunu Kaydetme ve Geri Yükleme
 // =======================================================
 function saveMusicState() {
     if (currentTrack && !currentTrack.paused) {
@@ -55,9 +51,6 @@ function saveMusicState() {
     }
 }
 
-// =======================================================
-// Müzik Durumunu Geri Yükleme Fonksiyonu
-// =======================================================
 function restoreMusicState() {
     const trackId = localStorage.getItem('playingTrackId');
     const time = parseFloat(localStorage.getItem('playbackTime'));
@@ -68,7 +61,6 @@ function restoreMusicState() {
         
         audio.currentTime = time;
         currentTrack = audio;
-        isMusicPlaying = false; 
         
         if (button) {
             button.textContent = "Kaldığı Yerden Başlat"; 
@@ -77,10 +69,9 @@ function restoreMusicState() {
 }
 
 // =======================================================
-// Sayfa Geçiş Fonksiyonu
+// 3. Sayfa Geçiş Fonksiyonu
 // =======================================================
 function changePage(pageNumber) {
-    
     // Sayfa 4'e geçerken Müzik Kontrolü
     if (pageNumber === 4 && document.getElementById('page3').classList.contains('active-page')) {
         if (!isMusicPlaying) {
@@ -92,6 +83,7 @@ function changePage(pageNumber) {
                  warning.id = 'music-warning-message';
                  warning.style.color = '#ff69b4';
                  warning.style.fontWeight = 'bold';
+                 warning.style.textAlign = 'center';
                  warning.textContent = "Lütfen önce bir müzik seçin ve başlatın. Bu, mesajın duygusal akışı için önemlidir!";
                  musicContainer.insertBefore(warning, musicContainer.querySelector('.music-player-container'));
             }
@@ -119,22 +111,17 @@ function changePage(pageNumber) {
         }
     }
     
-    window.scrollTo({
-        top: 0,
-        behavior: 'instant' 
-    });
+    window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
 // =======================================================
-// Ana İçeriği Gösterme Fonksiyonu (KRİTİK DÜZELTME)
+// 4. Ana İçeriği Gösterme Fonksiyonu
 // =======================================================
 function showMainContent() {
     const container = document.getElementById('container');
     if (container) {
-        // HTML'de gizlediğimiz içeriği burada AÇIYORUZ
         container.style.display = 'block'; 
     } 
-    
     document.body.classList.add('page-loaded');
 
     const cleanUrl = window.location.pathname;
@@ -144,35 +131,16 @@ function showMainContent() {
 }
 
 // =======================================================
-// Şifre Kontrolü Fonksiyonu
-// =======================================================
-function checkPassword() {
-    
-    const urlParams = new URLSearchParams(window.location.search);
-    
-    // Eğer animasyon bitti ve geri döndüyse
-    if (urlParams.get('passed') === 'true') {
-        showMainContent(); 
-        return; 
-    }
-
-    // İlk girişte içerik HTML'den gizli olduğu için arka plan boştur.
-    let passwordAttempt = prompt("Merhaba Beyza, burası sadece sana özel. Lütfen kodu girerek içeri gir. İpucu: En sevdiğin çiçek. :)");
-
-    if (passwordAttempt === CORRECT_PASSWORD) { 
-        window.location.replace("animation.html"); 
-    } else if (passwordAttempt !== null && passwordAttempt !== "") {
-        alert("Üzgünüm, kod yanlış. Lütfen tekrar dene.");
-        checkPassword(); 
-    } else {
-        document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column;'><h1 style='color: #ff69b4;'>Bu sayfa gizlidir.</h1><p style='color: #f0f0f0;'>Sayfayı yenileyip tekrar deneyebilirsin.</p></div>";
-    }
-}
-
-// =======================================================
-// Başlangıç
+// 5. Başlangıç ve Otomatik Akış Yönetimi
 // =======================================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Burada artık gizleme yapmıyoruz çünkü HTML'de style="display:none" var.
-    checkPassword();
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Eğer animasyon bitti ve parametreyle geri döndüyse ana içeriği aç
+    if (urlParams.get('passed') === 'true') {
+        showMainContent(); 
+    } else {
+        // İlk kez giriyorsa şifre sormadan DİREKT animasyona gönder
+        window.location.replace("animation.html"); 
+    }
 });
